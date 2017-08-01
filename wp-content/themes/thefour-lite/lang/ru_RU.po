@@ -1,0 +1,437 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TheFour Lite v1.0.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-05-26 15:35+0300\n"
+"Last-Translator: admin\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"Language: ru\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ thefour-lite
+#: comments.php:27
+msgid "1 Comment"
+msgstr "Один комментарий"
+
+# @ thefour-lite
+#: comments.php:27
+msgid "% Comments"
+msgstr "Комментариев: %"
+
+# @ thefour-lite
+#: comments.php:38
+msgid "Pingback"
+msgid_plural "Pingbacks"
+msgstr[0] "Пингбек"
+msgstr[1] ""
+msgstr[2] ""
+
+# @ thefour-lite
+#: comments.php:49
+msgid "Comment navigation"
+msgstr "Навигация по комментариям"
+
+# @ thefour-lite
+#: comments.php:52
+msgid "Older Comments"
+msgstr "Старые комментарии"
+
+# @ thefour-lite
+#: comments.php:56
+msgid "Newer Comments"
+msgstr "Новые комментарии"
+
+# @ thefour-lite
+#: comments.php:69 template-parts/content-hero.php:28
+msgid "Comments are closed."
+msgstr "Комментарии закрыты."
+
+# @ thefour-lite
+#: comments.php:76
+msgid "Your email address will not be published."
+msgstr "Ваш электронный адрес не будет опубликован."
+
+# @ thefour-lite
+#: comments.php:79
+msgid "Name"
+msgstr "Имя"
+
+# @ thefour-lite
+#: comments.php:80
+msgid "EmailSender"
+msgstr "Почта"
+
+# @ thefour-lite
+#: comments.php:81
+msgid "Website"
+msgstr "Сайт"
+
+# @ thefour-lite
+#: footer.php:42
+#, php-format
+msgid "Proudly powered by %s."
+msgstr ""
+
+# @ thefour-lite
+#: footer.php:50
+#, php-format
+msgid "Theme %s by %s."
+msgstr ""
+
+# @ thefour-lite
+#: functions.php:45
+msgid "Primary Menu"
+msgstr "Основное меню"
+
+# @ thefour-lite
+#: functions.php:46
+msgid "Social Links Menu"
+msgstr "Социальные сети"
+
+# @ thefour-lite
+#: functions.php:61
+msgid "Primary Sidebar"
+msgstr "Основной сайдбар"
+
+# @ thefour-lite
+#: functions.php:70
+#, php-format
+msgid "Footer %d"
+msgstr "Футер %d"
+
+# @ thefour-lite
+#: functions.php:99
+msgid "Latest Updates"
+msgstr "Последние обновления"
+
+# @ thefour-lite
+#: functions.php:100 inc/customizer/customizer.php:151
+msgctxt "Front end default tag slug for featured blog posts"
+msgid "front-page"
+msgstr "Главная страница"
+
+# @ thefour-lite
+#: header.php:36
+msgid "Primary Navigation"
+msgstr "Главная навигация"
+
+# @ thefour-lite
+#: header.php:37
+msgid "Menu"
+msgstr "Меню"
+
+# @ thefour-lite
+#: header.php:47
+msgid "Skip to content"
+msgstr "Перейти к содержанию"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:60
+msgid "Header"
+msgstr "Шапка"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:73
+msgid "Topbar"
+msgstr "Верхняя панель"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:74
+msgid "The topbar is displayed above the header image and navbar only displayed only if either topbar text is entered below or the Social Links Menu location has menu (see Menus panel in the Customizer)."
+msgstr "Topbar отображается выше заголовок изображения и навигационной панели, отображаются только если либо topbar текст ниже или местоположения социальных ссылки меню меню (см. Панель меню в средстве настройки)."
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:82
+msgid "Topbar text"
+msgstr "Topbar текст"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:86
+msgid "This text will be displayed on the left of the topbar. HTML is allowed."
+msgstr "Этот текст будет отображаться в левой части topbar. Допускается HTML."
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:94
+msgid "Navbar position"
+msgstr "Панель навигации"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:98
+msgid "Overlay the header image"
+msgstr "Наложение заголовок изображения"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:99
+msgid "Above the header image"
+msgstr "Выше заголовок изображения"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:100
+msgid "Below the header image"
+msgstr "Ниже заголовок изображения"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:109
+msgid "Navbar fixed to top when scroll?"
+msgstr "Фиксированный или прокрутка"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:122
+msgid "Logo"
+msgstr "Логотип"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:125
+msgid "The logo will be displayed on the left of the navbar. If no logo is selected, the website title will be displayed."
+msgstr "Логотип будет отображаться в левой части навигационной панели. Если логотип не выбран, будет отображаться название веб-сайта."
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:136
+msgid "Blog section title"
+msgstr "Заголовок раздела блога"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:147
+msgid "Blog posts tag name"
+msgstr "Теги"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:150
+#, php-format
+msgid "Use a <a href=\"%s\">tag</a> to make your posts displayed in Blog section in the front page. If no posts match the tag, latest posts will be displayed instead."
+msgstr "Используйте <a href=\"%1$s\">\"рекомендуемый\" тег</a>, чтобы показать свои сообщения. Вы можете изменить этот тег по вашему выбору; если нет записей которые соответствуют тегу, <a href=\"%2$s\">Прикрепленные записи</a>вместо него будет отображаться."
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:161
+msgid "Don&rsquo;t display tag on front end."
+msgstr "Не отображать метки на главной"
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:174
+msgid "Flourish"
+msgstr ""
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:177
+msgid "The flourish image will be displayed in the bottom of the front page. This can be an image of client logos, a promotional banner, a map showing where your business is located or anything else that you can think to put in this space."
+msgstr ""
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:185
+msgid "Flourish section title"
+msgstr ""
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:200
+msgid "Upgrade to Pro"
+msgstr ""
+
+# @ thefour-lite
+#: inc/customizer/customizer.php:201
+msgid "View documentation"
+msgstr "Просмотреть документацию"
+
+# @ thefour-lite
+#: inc/header.php:96
+#, php-format
+msgid "Search results: \"%s\""
+msgstr "Результаты поиска: %s"
+
+# @ thefour-lite
+#: inc/header.php:100 template-parts/content-category.php:6
+#, php-format
+msgid "(page %s of %s)"
+msgstr "(страница %s из %s)"
+
+# @ thefour-lite
+#: inc/media.php:67
+msgctxt "Lato font: on or off"
+msgid "on"
+msgstr ""
+
+# @ thefour-lite
+#: inc/media.php:76
+msgctxt "Montserrat font: on or off"
+msgid "on"
+msgstr ""
+
+# @ thefour-lite
+#: inc/media.php:85
+msgctxt "Add new subset (greek, cyrillic, devanagari, vietnamese)"
+msgid "no-subset"
+msgstr ""
+
+# @ thefour-lite
+#: inc/social-buttons.php:39
+msgid "Share this on Facebook"
+msgstr "Поделиться в Facebook"
+
+# @ thefour-lite
+#: inc/social-buttons.php:58
+msgid "Tweet on Twitter"
+msgstr ""
+
+# @ thefour-lite
+#: inc/social-buttons.php:77
+msgid "Share on Google+"
+msgstr ""
+
+# @ thefour-lite
+#: inc/template-tags.php:15 inc/template-tags.php:28
+#: template-parts/content.php:25
+#, php-format
+msgid "Continue reading &raquo; %s"
+msgstr "Читать далее &raquo; %s"
+
+# @ thefour-lite
+#: inc/template-tags.php:71
+#, php-format
+msgid "View all posts by %s"
+msgstr "Все записи автора: %s"
+
+# @ thefour-lite
+#: index.php:17
+#, php-format
+msgid "Page %s of %s"
+msgstr "Страница %s из %s"
+
+# @ thefour-lite
+#: index.php:32 search.php:24
+msgid "&laquo; Previous"
+msgstr "&laquo; Назад"
+
+# @ thefour-lite
+#: index.php:33 search.php:25
+msgid "Next &raquo;"
+msgstr "Вперед &raquo;"
+
+# @ thefour-lite
+#: searchform.php:9
+msgctxt "label"
+msgid "Search for:"
+msgstr "Искать:"
+
+# @ thefour-lite
+#: searchform.php:10
+msgid "Search form"
+msgstr "Форма поиска"
+
+# @ thefour-lite
+#: searchform.php:13
+msgid "Search"
+msgstr "Поиск"
+
+# @ thefour-lite
+#: single.php:36
+msgid "Next"
+msgstr "Вперед"
+
+# @ thefour-lite
+#: single.php:37
+msgid "Next post:"
+msgstr "Следующая запись:"
+
+# @ thefour-lite
+#: single.php:39
+msgid "Previous"
+msgstr "Назад"
+
+# @ thefour-lite
+#: single.php:40
+msgid "Previous post:"
+msgstr "Предыдущая запись:"
+
+# @ thefour-lite
+#: template-parts/comment-ping.php:2
+msgid "Pingback:"
+msgstr "Пингбек:"
+
+# @ thefour-lite
+#: template-parts/comment-ping.php:2
+msgid "(Edit)"
+msgstr "Редактировать"
+
+# @ thefour-lite
+#: template-parts/comment.php:14
+msgid "(Post author)"
+msgstr "Автор записи"
+
+# @ thefour-lite
+#: template-parts/comment.php:29
+msgid "Awaiting moderation"
+msgstr "Ожидает проверки"
+
+# @ thefour-lite
+#: template-parts/comment.php:36
+msgid "Edit"
+msgstr "Изменить"
+
+# @ thefour-lite
+#: template-parts/comment.php:37
+msgid "Reply"
+msgstr "Ответить"
+
+# @ thefour-lite
+#: template-parts/content-error-404.php:1
+msgid "Error 404"
+msgstr "Ошибка 404"
+
+# @ thefour-lite
+#: template-parts/content-error-404.php:3
+msgid "It seems like you have tried to open a page that doesn't exist. It could have been deleted, moved, or it never existed at all. You are welcome to search for what you are looking for with the form below."
+msgstr ""
+"Похоже, вы пытаетесь открыть страницу, которой не существует. \n"
+"Возможно она была удалена, либо не существовала вовсе. \n"
+"Попробуйте еще раз вот по этой форме..."
+
+# @ thefour-lite
+#: template-parts/content-hero.php:19
+#, php-format
+msgid "by %s &mdash; in %s."
+msgstr "Автор: %s &mdash; категория: %s."
+
+# @ thefour-lite
+#: template-parts/content-hero.php:24
+msgid "No comment."
+msgstr "Нет комментариев"
+
+# @ thefour-lite
+#: template-parts/content-hero.php:25
+msgid "1 Comment."
+msgstr "Один комментарий"
+
+# @ thefour-lite
+#: template-parts/content-hero.php:26
+msgid "% Comments."
+msgstr "Комментариев: %"
+
+# @ thefour-lite
+#: template-parts/content-none.php:13
+msgid "Nothing Found"
+msgstr "Ничего не найдено"
+
+# @ thefour-lite
+#: template-parts/content-none.php:19
+#, php-format
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Готовы опубликовать свою первую запись? <a href=\"%1$s\">Начните сейчас</a>."
+
+# @ thefour-lite
+#: template-parts/content-none.php:23
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "К сожалению, по вашему запросу ничего не найдено. Попробуйте использовать другие ключевые слова."
+
+# @ thefour-lite
+#: template-parts/content-none.php:28
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Кажется, мы не можем найти то, что вы ищете. Возможно поиск сможет помочь."

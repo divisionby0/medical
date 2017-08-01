@@ -1,0 +1,250 @@
+[02/Nov/2016:14:42:07] (plugins) start logging...
+[02/Nov/2016:14:43:08] (admin-ajax) start logging...
+[02/Nov/2016:14:44:08] (admin-ajax) start logging...
+[02/Nov/2016:14:46:08] (admin-ajax) start logging...
+[02/Nov/2016:14:48:08] (admin-ajax) start logging...
+[02/Nov/2016:14:50:08] (admin-ajax) start logging...
+[02/Nov/2016:14:52:08] (admin-ajax) start logging...
+[02/Nov/2016:14:57:38] (admin-ajax) start logging...
+[02/Nov/2016:14:59:38] (admin-ajax) start logging...
+[02/Nov/2016:15:01:41] (admin-ajax) start logging...
+[02/Nov/2016:15:01:41] (plugins) start logging...
+[02/Nov/2016:15:01:49] (plugins) start logging...
+[02/Nov/2016:15:01:50] (plugins) start logging...
+[02/Nov/2016:15:01:54] (plugins) start logging...
+[02/Nov/2016:15:02:31] (plugins) start logging...
+[02/Nov/2016:15:03:17] (index) start logging...
+[02/Nov/2016:15:03:58] (plugins) start logging...
+[02/Nov/2016:15:04:02] (plugins) start logging...
+[02/Nov/2016:15:04:03] (plugins) start logging...
+[02/Nov/2016:15:04:08] (plugins) start logging...
+[02/Nov/2016:15:04:36] (plugins) start logging...
+[02/Nov/2016:15:04:37] (plugins) start logging...
+[02/Nov/2016:15:04:41] (plugins) start logging...
+[02/Nov/2016:15:05:37] (plugins) start logging...
+[02/Nov/2016:15:05:39] (plugins) start logging...
+[02/Nov/2016:15:05:43] (plugins) start logging...
+[02/Nov/2016:15:05:44] (plugins) start logging...
+[02/Nov/2016:15:05:48] (plugins) start logging...
+[02/Nov/2016:15:06:09] (plugins) start logging...
+[02/Nov/2016:15:06:15] (plugins) start logging...
+[02/Nov/2016:15:06:18] (plugins) start logging...
+[02/Nov/2016:15:06:19] (plugins) start logging...
+[02/Nov/2016:15:06:22] (plugins) start logging...
+[02/Nov/2016:15:38:53] (admin) updating block id=0  content=empty1
+[02/Nov/2016:15:38:53] (admin) updating block id=1  content=empty2
+[02/Nov/2016:15:38:53] (admin) updating block id=2  content=empty3
+[02/Nov/2016:15:39:36] (admin) updating block id=0  content=empty1
+[02/Nov/2016:15:39:36] (admin) updateResult=
+[02/Nov/2016:15:39:36] (admin) updating block id=1  content=empty2
+[02/Nov/2016:15:39:36] (admin) updateResult=
+[02/Nov/2016:15:39:36] (admin) updating block id=2  content=empty3
+[02/Nov/2016:15:39:36] (admin) updateResult=
+[02/Nov/2016:15:39:53] (admin) updating block id=0  content=empty1
+[02/Nov/2016:15:39:53] (admin) updateResult=
+[02/Nov/2016:15:39:53] (admin) updating block id=1  content=empty
+[02/Nov/2016:15:39:53] (admin) updateResult=
+[02/Nov/2016:15:39:53] (admin) updating block id=2  content=empty
+[02/Nov/2016:15:39:53] (admin) updateResult=
+[02/Nov/2016:15:40:37] (admin) updating block id=0  content=empty1
+[02/Nov/2016:15:40:37] (admin) updateResult=
+[02/Nov/2016:15:40:37] (admin) updating block id=1  content=empty2
+[02/Nov/2016:15:40:37] (admin) updateResult=
+[02/Nov/2016:15:40:37] (admin) updating block id=2  content=empty3
+[02/Nov/2016:15:40:37] (admin) updateResult=
+[02/Nov/2016:15:43:59] (admin) updating block id=0  content=empty1
+[02/Nov/2016:15:43:59] (admin) updateResult=
+[02/Nov/2016:15:43:59] (admin) updating block id=1  content=empty
+[02/Nov/2016:15:43:59] (admin) updateResult=
+[02/Nov/2016:15:43:59] (admin) updating block id=2  content=empty
+[02/Nov/2016:15:43:59] (admin) updateResult=
+[02/Nov/2016:15:44:39] (admin) updating block id=0  content=1
+[02/Nov/2016:15:44:39] (admin) updateResult=
+[02/Nov/2016:15:44:39] (admin) updating block id=1  content=empty
+[02/Nov/2016:15:44:39] (admin) updateResult=
+[02/Nov/2016:15:44:39] (admin) updating block id=2  content=empty
+[02/Nov/2016:15:44:39] (admin) updateResult=
+[02/Nov/2016:15:44:49] (admin) updating block id=0  content=empty123
+[02/Nov/2016:15:44:49] (admin) updateResult=
+[02/Nov/2016:15:44:49] (admin) updating block id=1  content=empty
+[02/Nov/2016:15:44:49] (admin) updateResult=
+[02/Nov/2016:15:44:49] (admin) updating block id=2  content=empty
+[02/Nov/2016:15:44:49] (admin) updateResult=
+[02/Nov/2016:15:45:04] (admin) updating block id=0  content=empty1
+[02/Nov/2016:15:45:04] (admin) updateResult=1
+[02/Nov/2016:15:45:04] (admin) updating block id=1  content=empty
+[02/Nov/2016:15:45:04] (admin) updateResult=0
+[02/Nov/2016:15:45:04] (admin) updating block id=2  content=empty
+[02/Nov/2016:15:45:04] (admin) updateResult=0
+[02/Nov/2016:15:45:10] (admin) updating block id=0  content=empty1
+[02/Nov/2016:15:45:10] (admin) updateResult=0
+[02/Nov/2016:15:45:10] (admin) updating block id=1  content=empty2
+[02/Nov/2016:15:45:10] (admin) updateResult=1
+[02/Nov/2016:15:45:10] (admin) updating block id=2  content=empty3
+[02/Nov/2016:15:45:10] (admin) updateResult=1
+[24/Mar/2017:12:32:35] (post) contentData
+[24/Mar/2017:12:32:48] (post) contentData
+[24/Mar/2017:12:49:27] (post) persons:Array
+[24/Mar/2017:12:49:36] (post) persons:{"id":"persons","type":"Map","_85523":{"_medicalDeclarationRequired":true,"_complete":true,"_confirmed":false,"_useSCCC":true,"_age":65,"_firstName":"ilya","_lastName":"vasilyev","_gender":"male","_relationship":"","_birthday":"1952-03-16","_questions":{"index":0,"collection":{"keys":["45028"],"id":"questions","items":{"45028":{"index":0,"type":"question","placeholder":"","showTextAtResult":true,"text":"<h2 style=\"font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);\">just text</h2>","id":45028,"answer":{"index":0,"variations":{"keys":[],"id":"variations","items":{}},"type":"textViewAnswer","text":"","children":{"index":0,"collection":{"keys":["82679"],"id":"questions","items":{"82679":{"index":0,"type":"question","placeholder":"","showTextAtResult":true,"text":"<p><font color=\"#333333\"><span style=\"font-size: 18px;\"><b>boolean</b></span></font><br></p>","id":82679,"answer":{"index":0,"variations":{"keys":["0","1"],"id":"variations","items":{"0":{"index":0,"collection":{"keys":[],"id":"questions","items":{}},"text":"No","type":"answerVariation","removable":false,"showTextAtResult":true,"id":11563},"1":{"index":1,"collection":{"keys":[],"id":"questions","items":{}},"text":"Yes","type":"answerVariation","removable":false,"showTextAtResult":true,"id":60519}}},"type":"booleanAnswer","text":"","value":"Yes"}}}},"text":"questions"},"value":"empty"}}}},"text":"questions"},"_period":2}}
+[24/Mar/2017:12:50:34] (post) persons:{"id":"persons","type":"Map","_85523":{"_medicalDeclarationRequired":true,"_complete":true,"_confirmed":false,"_useSCCC":true,"_age":65,"_firstName":"ilya","_lastName":"vasilyev","_gender":"male","_relationship":"","_birthday":"1952-03-16","_questions":{"index":0,"collection":{"keys":["45028"],"id":"questions","items":{"45028":{"index":0,"type":"question","placeholder":"","showTextAtResult":true,"text":"<h2 style=\"font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(51, 51, 51);\">just text</h2>","id":45028,"answer":{"index":0,"variations":{"keys":[],"id":"variations","items":{}},"type":"textViewAnswer","text":"","children":{"index":0,"collection":{"keys":["82679"],"id":"questions","items":{"82679":{"index":0,"type":"question","placeholder":"","showTextAtResult":true,"text":"<p><font color=\"#333333\"><span style=\"font-size: 18px;\"><b>boolean</b></span></font><br></p>","id":82679,"answer":{"index":0,"variations":{"keys":["0","1"],"id":"variations","items":{"0":{"index":0,"collection":{"keys":[],"id":"questions","items":{}},"text":"No","type":"answerVariation","removable":false,"showTextAtResult":true,"id":11563},"1":{"index":1,"collection":{"keys":[],"id":"questions","items":{}},"text":"Yes","type":"answerVariation","removable":false,"showTextAtResult":true,"id":60519}}},"type":"booleanAnswer","text":"","value":"Yes"}}}},"text":"questions"},"value":"empty"}}}},"text":"questions"},"_period":2}}
+[25/Mar/2017:02:25:34] (post) card type: Array
+[25/Mar/2017:02:25:44] (post) card type: mastercard
+[25/Mar/2017:02:26:20] (post) card type: mastercard
+[25/Mar/2017:02:26:20] (post) card number: 4444444444444444
+[25/Mar/2017:02:26:20] (post) card holder: tryjtyk
+[25/Mar/2017:02:26:20] (post) card exp. date: 2017-03-27
+[25/Mar/2017:02:27:39] (post) card type: mastercard
+[25/Mar/2017:02:27:39] (post) card number: 4444444444444444
+[25/Mar/2017:02:27:39] (post) card holder: tryjtyk
+[25/Mar/2017:02:27:39] (post) card exp. date: 2017-03-27
+[25/Mar/2017:02:27:54] (post) card type: mastercard
+[25/Mar/2017:02:27:54] (post) card number: 4444444444444444
+[25/Mar/2017:02:27:54] (post) card holder: tryjtyk
+[25/Mar/2017:02:27:54] (post) card exp. date: 2017-03-27
+[25/Mar/2017:02:28:23] (post) card type: mastercard
+[25/Mar/2017:02:28:23] (post) card number: 4444444444444444
+[25/Mar/2017:02:28:23] (post) card holder: tryjtyk
+[25/Mar/2017:02:28:23] (post) card exp. date: 2017-03-27
+[25/Mar/2017:02:31:18] (post) card type: mastercard
+[25/Mar/2017:02:31:18] (post) card number: 4444444444444444
+[25/Mar/2017:02:31:18] (post) card holder: tryjtyk
+[25/Mar/2017:02:31:18] (post) card exp. date: 2017-03-27
+[25/Mar/2017:20:09:19] (post) arrival date Array
+[25/Mar/2017:20:09:29] (post) arrival date 
+[25/Mar/2017:20:09:45] (post) arrival date 
+[25/Mar/2017:20:14:16] (post) arrival date 
+[26/Mar/2017:01:57:55] (post) quoteId: Array
+[26/Mar/2017:01:58:11] (post) quoteId: Array
+[26/Mar/2017:01:59:39] (post) quoteId: Array
+[26/Mar/2017:01:59:51] (post) quoteId: 806044
+[26/Mar/2017:02:00:29] (post) quoteId: 806044
+[26/Mar/2017:02:30:04] (post) quoteId: 2017-03-26:6-29-54
+[26/Mar/2017:15:25:52] (post) quoteId: 2017-03-26:19-25-42
+[26/Mar/2017:20:44:52] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:49:14] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:49:22] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:49:41] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:49:53] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:50:03] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:50:11] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:50:21] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:50:28] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:51:00] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:51:46] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:51:55] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:52:08] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:55:24] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:55:36] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:55:52] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:56:04] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:56:37] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:57:10] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:57:23] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:20:59:50] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:21:00:18] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:21:00:27] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:21:03:11] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:21:03:42] (post) quoteId: 2017-03-27:0-44-39
+[26/Mar/2017:21:20:52] (post) quoteId: 2017-03-27:0-44-39
+[27/Mar/2017:13:07:49] (post) quoteId: 2017-03-27:0-44-39
+[27/Mar/2017:13:07:52] (post) quoteId: 2017-03-27:0-44-39
+[27/Mar/2017:15:42:38] (post) quoteId: 2017-03-27:19-42-30
+[27/Mar/2017:19:14:02] (post) quoteId: 2017-03-27:23-13-55
+[27/Mar/2017:19:15:52] (post) quoteId: 2017-03-27:23-13-55
+[27/Mar/2017:19:15:52] (post) city: Array
+[27/Mar/2017:19:15:52] (post) province: Array
+[27/Mar/2017:19:15:52] (post) code: Array
+[27/Mar/2017:19:16:05] (post) quoteId: 2017-03-27:23-13-55
+[27/Mar/2017:19:16:05] (post) city: 
+[27/Mar/2017:19:16:05] (post) province: 
+[27/Mar/2017:19:16:05] (post) code: 
+[27/Mar/2017:19:16:29] (post) quoteId: 2017-03-27:23-13-55
+[27/Mar/2017:19:16:29] (post) city: 
+[27/Mar/2017:19:16:29] (post) province: 
+[27/Mar/2017:19:16:29] (post) code: 
+[27/Mar/2017:19:16:56] (post) quoteId: 2017-03-27:23-13-55
+[27/Mar/2017:19:16:56] (post) city: 
+[27/Mar/2017:19:16:56] (post) province: 
+[27/Mar/2017:19:16:56] (post) code: 
+[27/Mar/2017:19:22:07] (post) quoteId: 2017-03-27:23-13-55
+[27/Mar/2017:19:22:07] (post) city: 
+[27/Mar/2017:19:22:07] (post) province: 
+[27/Mar/2017:19:22:07] (post) code: 
+[27/Mar/2017:19:22:18] (post) quoteId: 2017-03-27:23-21-18
+[27/Mar/2017:19:22:18] (post) city: 
+[27/Mar/2017:19:22:18] (post) province: 
+[27/Mar/2017:19:22:18] (post) code: 
+[27/Mar/2017:19:28:07] (post) quoteId: 2017-03-27:23-27-47
+[27/Mar/2017:19:28:07] (post) city: 
+[27/Mar/2017:19:28:07] (post) province: 
+[27/Mar/2017:19:28:07] (post) code: 
+[27/Mar/2017:19:29:03] (post) quoteId: 2017-03-27:23-27-47
+[27/Mar/2017:19:29:03] (post) city: 
+[27/Mar/2017:19:29:03] (post) province: 
+[27/Mar/2017:19:29:03] (post) code: 
+[27/Mar/2017:19:29:15] (post) quoteId: 2017-03-27:23-27-47
+[27/Mar/2017:19:29:15] (post) city: 
+[27/Mar/2017:19:29:15] (post) province: 
+[27/Mar/2017:19:29:15] (post) code: 
+[27/Mar/2017:19:29:25] (post) quoteId: 2017-03-27:23-27-47
+[27/Mar/2017:19:29:25] (post) city: 
+[27/Mar/2017:19:29:25] (post) province: 
+[27/Mar/2017:19:29:25] (post) code: 
+[27/Mar/2017:19:29:49] (post) quoteId: 2017-03-27:23-27-47
+[27/Mar/2017:19:29:49] (post) city: 
+[27/Mar/2017:19:29:49] (post) province: 
+[27/Mar/2017:19:29:49] (post) code: 
+[27/Mar/2017:19:30:03] (post) quoteId: 2017-03-27:23-27-47
+[27/Mar/2017:19:30:03] (post) city: 
+[27/Mar/2017:19:30:03] (post) province: 
+[27/Mar/2017:19:30:03] (post) code: 
+[27/Mar/2017:19:31:22] (post) quoteId: 2017-03-27:23-27-47
+[27/Mar/2017:19:31:22] (post) city: 
+[27/Mar/2017:19:31:22] (post) province: 
+[27/Mar/2017:19:31:22] (post) code: 
+[27/Mar/2017:19:32:22] (post) quoteId: 2017-03-27:23-27-47
+[27/Mar/2017:19:32:22] (post) city: 
+[27/Mar/2017:19:32:22] (post) province: 
+[27/Mar/2017:19:32:22] (post) code: 
+[04/Apr/2017:15:57:40] (post) sponsorFirstName=
+[04/Apr/2017:15:58:04] (post) sponsorFirstName=
+[04/Apr/2017:15:58:44] (post) sponsorFirstName=
+[04/Apr/2017:16:30:31] (post) sponsorFirstName=
+[04/Apr/2017:16:31:01] (post) sponsorFirstName=
+[28/May/2017:10:04:59] (post) SAVING POST...
+[28/May/2017:10:06:02] (post) start logging...
+[28/May/2017:10:06:03] (admin-ajax) start logging...
+[28/May/2017:10:06:05] (post) start logging...
+[28/May/2017:10:06:06] (admin-ajax) start logging...
+[28/May/2017:10:06:45] (post) start logging...
+[28/May/2017:10:06:46] (admin-ajax) start logging...
+[28/May/2017:10:07:00] (post) start logging...
+[28/May/2017:10:07:01] (admin-ajax) start logging...
+[28/May/2017:10:08:03] (admin-ajax) start logging...
+[28/May/2017:10:08:24] (post) start logging...
+[28/May/2017:10:08:25] (admin-ajax) start logging...
+[28/May/2017:10:09:05] (post) initPlugin
+[28/May/2017:10:09:06] (admin-ajax) initPlugin
+[28/May/2017:10:10:07] (admin-ajax) initPlugin
+[28/May/2017:10:10:11] (post) initPlugin
+[28/May/2017:10:10:12] (admin-ajax) initPlugin
+[28/May/2017:10:10:37] (post) initPlugin
+[28/May/2017:10:10:38] (admin-ajax) initPlugin
+[28/May/2017:10:11:08] (post) initPlugin
+[28/May/2017:10:11:09] (admin-ajax) initPlugin
+[28/May/2017:10:11:24] (post) initPlugin
+[28/May/2017:10:11:25] (admin-ajax) initPlugin
+[28/May/2017:10:12:26] (admin-ajax) initPlugin
+[28/May/2017:10:13:32] (admin-ajax) initPlugin
+[28/May/2017:10:13:33] (post) initPlugin
+[28/May/2017:10:13:34] (admin-ajax) initPlugin
+[28/May/2017:10:14:07] (post) initPlugin
+[28/May/2017:10:14:09] (admin-ajax) initPlugin
+[28/May/2017:10:14:11] (post) initPlugin
+[28/May/2017:10:14:12] (admin-ajax) initPlugin
+[28/May/2017:10:15:09] (post) initPlugin
+[28/May/2017:10:15:10] (post) initPlugin
+[28/May/2017:10:15:12] (admin-ajax) initPlugin
+[28/May/2017:10:16:13] (admin-ajax) initPlugin
+[28/May/2017:10:18:13] (admin-ajax) initPlugin
+[28/May/2017:10:20:13] (admin-ajax) initPlugin

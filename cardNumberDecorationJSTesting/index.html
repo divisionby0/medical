@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>123</title>
+
+    <script type="application/javascript">
+
+        var cardNumber = "123456789876543";
+        var decoratedCardNumber = decorateCardNumber(cardNumber);
+
+        console.log(cardNumber);
+        console.log(decoratedCardNumber);
+
+        var money = 54789321882;
+        console.log("money="+money);
+        console.log(formatMoneyInt(money));
+
+
+        function decorateCardNumber(source){
+            var characters = source.split("");
+            var totalCharacters = characters.length;
+
+            var result = "";
+            for(var i=0; i<totalCharacters;i++){
+                console.log(i,totalCharacters);
+                if(i < totalCharacters - 4){
+                    result+="*";
+                }
+                else{
+                    result+=characters[i];
+                }
+
+            }
+            return result;
+        }
+
+
+        function formatMoneyInt(source){
+            return "$ "+splitMoney(source);
+        }
+
+        function splitMoney(source){
+            var n = source.toString(), p = n.indexOf('.');
+            return n.replace(/\d(?=(?:\d{3})+(?:\.|$))/g, function($0, i){
+                return p<0 || i<p ? ($0+' ') : $0;
+            });
+        }
+
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

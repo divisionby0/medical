@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<table class="fullwidth">
+    <!-- Header -->
+    <tr>
+        <th>
+            Plan
+            <select name="planSelect" id="planSelect" class="fullwidth centered">
+                <option value="1">option1</option>
+                <option value="2">option 2</option>
+            </select>
+        </th>
+        <th>Benefits</th>
+        <th>Limitations</th>
+    </tr>
+
+    <!-- company 1-->
+    <tr class="resultTableRow">
+        <!-- PLAN -->
+        <td class="planTableColumn">
+            <table class="fullwidth planTable" id="planTable">
+                <div class="fullwidth centered"><b>COMPANY NAME</b></div>
+                <tr class="resultTableRow">
+                    <th>Premium</th>
+                    <th>Deductible</th>
+                </tr>
+                <tr class="resultTableRow">
+                    <td class="planTableItemRenderer">$11.26</td>
+                    <td class="planTableItemRenderer">$1</td>
+                </tr>
+                <tr class="resultTableRow">
+                    <td class="planTableItemRenderer">$11.25</td>
+                    <td class="planTableItemRenderer">$2</td>
+                </tr>
+                <tr class="resultTableRow">
+                    <td class="planTableItemRenderer">$11.24</td>
+                    <td class="planTableItemRenderer">$3</td>
+                </tr>
+            </table>
+            <div class="centered fullwidth buyButton">
+                <input type="button" value="Buy online"/>
+            </div>
+        </td>
+
+        <!-- benefits -->
+        <td class="companyTableItemRenderer">
+            <div class="companyTextData">
+                При хранении важных данных (к примеру, банковский счет) важен каждый символ даже в последнем разряде после точки, поэтому использовать числа с плавающей точкой нельзя.
+                Избежать проблем хранения и поиска данных можно при помощи типов: <strong>DECIMAL</strong>, <strong>NUMERIC</strong>.
+                До версии 5.03 эти типы хранились как строки, при этом использовалось по одному символу строки для каждого разряда числа (при необходимости, тратились дополнительно по одному символу на знак числа и на десятичный разделитель), также была возможна потеря точности из-за некорректной реализации арифметики таких чисел.
+                <div class="b-article__announce-wr"></div>
+                <div class="b-article__body js-mediator-article"></div>
+            </div>
+        </td>
+
+
+        <!-- limitations -->
+        <td class="companyTableItemRenderer">
+            <div class="companyTextData">
+                В <strong>MySQL </strong>существует множество типов данных для хранения чисел как целых, так и с плавающей точкой.
+                Рассмотрим существующие форматы:
+                Для целых используются: <strong>TINYINT</strong>, <strong>SMALLINT</strong>, <strong>MEDIUMINT</strong>, <strong>INT</strong>, <strong>BIGINT</strong>. Эти типы используются для хранения целых чисел и занимают от 1 до 8 байт памяти соответственно.
+                Для чисел с плавающей точкой используются: <strong>FLOAT</strong>, <strong>DOUBLE</strong>. Главный минус чисел с плавающей точкой (или вещественных чисел) – принцип их представления и хранения. Такие числа хранятся как степени двойки. Так как не все десятичные числа имеют точное представление в виде двоичной дроби, результаты хранения получаются округленными. Даже при элементарных математических операциях возможны расхождения. Более подробно про это можно прочитать на <a href="http://habrahabr.ru/blogs/cpp/112953/" rel="external nofollow">хабре</a>
+                <strong>.</strong>
+                <div id="inject_1476128338" class="b-inject b-inject__type-big"></div>
+                <div id="inject_1476065847" class="b-inject b-inject__type-big"></div>
+            </div>
+        </td>
+    </tr>
+
+    <!-- company 2 -->
+    <tr class="resultTableRow">
+        <td class="planTableColumn">
+            <table class="fullwidth">
+                <div class="fullwidth centered"><b>COMPANY NAME</b></div>
+                <tr class="resultTableRow">
+                    <th>Premium</th>
+                    <th>Deductible</th>
+                </tr>
+                <tr class="resultTableRow">
+                    <td class="planTableItemRenderer">$11.26</td>
+                    <td class="planTableItemRenderer">$1</td>
+                </tr>
+                <tr class="resultTableRow">
+                    <td class="planTableItemRenderer">$11.25</td>
+                    <td class="planTableItemRenderer">$2</td>
+                </tr>
+                <tr class="resultTableRow">
+                    <td class="planTableItemRenderer">$11.24</td>
+                    <td class="planTableItemRenderer">$3</td>
+                </tr>
+            </table>
+            <div class="centered fullwidth buyButton">
+                <input type="button" value="Buy online"/>
+            </div>
+        </td>
+        <td class="companyTableItemRenderer">
+            company 2 benefits
+        </td>
+        <td class="companyTableItemRenderer">company 2 limitations</td>
+    </tr>
+</table>
+</body>
+</html>

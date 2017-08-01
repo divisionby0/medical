@@ -1,0 +1,3 @@
+interface  IUserAnswer{
+    hasUserValue():boolean;
+}

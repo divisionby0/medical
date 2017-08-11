@@ -2778,7 +2778,7 @@ var PersonDetailsPage = (function (_super) {
         var quoteId = Cookie.getQuoteId();
         var personsData = this.persons.getData();
         var decodedPersonsData = escape(personsData);
-        alert("saving persons data quoteId="+quoteId);
+        //alert("saving persons data quoteId="+quoteId);
         DB.savePersons(decodedPersonsData, quoteId);
     };
     PersonDetailsPage.prototype.getUncompletePerson = function () {

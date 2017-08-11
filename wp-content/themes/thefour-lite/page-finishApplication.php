@@ -18,8 +18,6 @@ echo '<input id="appIdContainer" value="'.Cookie::getQuoteId().'" type="hidden">
 new UserSelectionFinishPageView();
 ?>
 
-<!--<h1>Finish application page</h1>-->
-
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
     the_content();
 endwhile; else: ?>

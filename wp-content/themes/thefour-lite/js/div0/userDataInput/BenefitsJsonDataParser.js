@@ -1,4 +1,5 @@
 var BenefitsJsonDataParser = function(){
+
     return{
         parse:function(jsonData){
 
@@ -37,4 +38,3 @@ var BenefitsJsonDataParser = function(){
         }
     }
 }
-

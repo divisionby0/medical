@@ -15,17 +15,18 @@ $(document).ready(function($) {
     var getCompaniesBenefitsDataJson = new GetCompaniesBenefitsDataJson();
     var companiesBenefitsJson = getCompaniesBenefitsDataJson.execute();
     
-    //var isAtCompaniesTablePage = $('#pageType').text() == 'companiesTablePage';
+   // var isAtCompaniesTablePage = $('#pageType').text() == 'companiesTablePage';
     //var isAtApplicationCreationPage = $('#pageType').text() == 'applicationCreationPage';
     //var isAtBenefitsByUserDataAndZeroDeductiblePage = $('#pageType').text() == 'benefitsByUserDataAndZeroDeductiblePage';
     //var isAtUserDetailsPage = $('#pageType').text() == 'personDetailsPage';
-    //var isAtOrderOnlineTestingPage = $('#pageType').text() == 'orderOnlinePageTesting';
+   // var isAtOrderOnlineTestingPage = $('#pageType').text() == 'orderOnlinePageTesting';
     //var isAtCompanyPlanSelectionPage = $('#pageType').text() == 'companyPlanSelection';
     var isAtSimplePage = $('#pageType').text() == 'simplePage';
 
     var pageType = $('#pageType').text();
 
     var page = PageFactory.create(pageType);
+
 
     if(!page){
         return;

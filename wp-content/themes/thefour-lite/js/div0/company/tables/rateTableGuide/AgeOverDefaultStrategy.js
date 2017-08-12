@@ -1,6 +1,9 @@
 //TODO вообще непонятно почему называется Over 
 var AgeOverDefaultStrategy = function(){
+
     function isAgeInsideRange(rateTableGuideItem, age){
+
+
         var ageFrom = parseInt(rateTableGuideItem.get('ageFrom'));
         var ageTill = parseInt(rateTableGuideItem.get('ageTill'));
 

@@ -1,4 +1,5 @@
 var FormDataParser = function(){
+
     function parseAges(ages){
         if(typeof ages === 'string' || ages instanceof String){
             ages = ages.replace(/\\"/g, '"');
@@ -9,6 +10,7 @@ var FormDataParser = function(){
             return ages;
         }
     }
+
     function parseBenefit(benefit){
         return parseInt(benefit);
     }
@@ -33,6 +35,8 @@ var FormDataParser = function(){
 
     return{
         parse:function(formData){
+
+            console.log("parse form data ", formData);
             var startDateString;
             try{
                 startDateString = formData.startDate.date;
@@ -40,6 +44,7 @@ var FormDataParser = function(){
             catch(error){
                 return;
             }
+            //var startDateString = formData.startDate.date;
             var finishDateString = formData.finishDate.date;
 
             var startDate = new Date(startDateString);
@@ -56,6 +61,11 @@ var FormDataParser = function(){
 
             var numPersons = parseNumPersons(formData.numPersons);
             formData.numPersons = numPersons;
+
+            //var totalDays = parseTotalDays(startDate, finishDate);
+            //formData.totalDays = totalDays;
+            
+            
             return formData;
         }
     }

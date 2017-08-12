@@ -7,6 +7,8 @@ var DeductibleAmountOptions = function(){
         }
         return false;
     }
+
+
     return{
         create:function(data){
             dataProvider = data;
@@ -34,6 +36,7 @@ var DeductibleAmountOptions = function(){
                 var optionAgeTill= option.get('ageTill');
 
                 var ageInsideOptionAgeRange = isAgeInsideRange(age, optionAgeFrom, optionAgeTill);
+                //console.log("selected age "+age+" inside option age range "+ageInsideOptionAgeRange);
 
                 if(ageInsideOptionAgeRange){
                     if(optionDeductible == deductible){

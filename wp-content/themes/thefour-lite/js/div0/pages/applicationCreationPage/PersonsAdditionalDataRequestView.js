@@ -109,8 +109,9 @@ var PersonsAdditionalDataRequestView = (function () {
         console.log("createArrivalDatePicker");
         console.log("default date: ", new Date());
         this.arrivalDateControl.datepicker({
+            minDate: 0,
             changeYear: true,
-            yearRange: '-1:+10',
+            yearRange: '-0:+10',
             defaultDate: new Date(),
             onSelect: function (dateText) { return _this.onArrivalDateSelected(dateText); }
         });

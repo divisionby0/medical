@@ -1,8 +1,11 @@
 var Persons = function(){
+    
     var collection;
+
     function sortingFunction(a, b){
         return a-b
     }
+    
     return{
         setCollection:function(_collection){
             collection = _collection;

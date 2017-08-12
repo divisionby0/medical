@@ -1,5 +1,7 @@
 var StandardRates = function(){
+
     var dataProvider;
+
     return{
         create:function(data){
             dataProvider = data;

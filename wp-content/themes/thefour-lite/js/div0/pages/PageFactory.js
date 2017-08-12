@@ -5,8 +5,6 @@
 ///<reference path="cardDetailsPage/CardDetailsPage.ts"/>
 ///<reference path="applicationFinishPage/ApplicationFinishPage.ts"/>
 ///<reference path="sendResultEmailPage/SendResultEmailPage.ts"/>
-///<reference path="medIssuesSelectionPage/MedIssuesSelectionPage.ts"/>
-///<reference path="testing/QuizTestingPage.ts"/>
 var PageFactory = (function () {
     function PageFactory() {
     }
@@ -24,9 +22,6 @@ var PageFactory = (function () {
         else if (type == "cardDetailsPage") {
             return new CardDetailsPage();
         }
-        else if (type == "medicalIssuesSelectionPage") {
-            return new MedIssuesSelectionPage();
-        }
         else if (type == "applicationCreationPage") {
             return new ApplicationCreationPage();
         }
@@ -42,15 +37,9 @@ var PageFactory = (function () {
         else if (type == "simplePage") {
             return new UserInputFormPage();
         }
-        else if (type == "quizTestingPage") {
-            console.log("Loading Quiz testing page...");
-            return new QuizTestingPage();
+        else if (type == "datePickerYearAndMonthOnlyTestingPage") {
+            return new DatePickerYearAndMonthOnlyTestingPage();
         }
-        /*
-    else if(type == "datePickerYearAndMonthOnlyTestingPage"){
-        return new DatePickerYearAndMonthOnlyTestingPage();
-    }
-    */
     };
     return PageFactory;
 }());

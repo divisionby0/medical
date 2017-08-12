@@ -40,7 +40,10 @@ var SendResultEmailPage = (function () {
         console.log("applicationHtmlFileUrl=" + applicationHtmlFileUrl);
         // var emailBody:string = "<b>Thanks</b> for your application. You can download it using <a href='"+applicationHtmlFileUrl+"'>this link</a> <a href='"+applicationHtmlFileUrl+"'>"+applicationHtmlFileUrl+"</a>. Best regards.";
         this.emailBody = '<b>Thanks</b> for your application. You can download it using this link <p><a href="' + applicationHtmlFileUrl + '" target="_blank">' + applicationHtmlFileUrl + '</a></p><p>Best regards</p>';
+        console.log("emailBody=" + this.emailBody);
+        console.log("___appId=" + this.appId);
         this.sendApplicationAdminEmail();
+        //this.emailSender.sendApplicationResult(this.receiver, this.emailBody, this.appId);
     };
     SendResultEmailPage.prototype.onApplicationEmailSentResult = function (result) {
         var dialogContent = this.$j("<div>" + result + "</div>");
@@ -130,7 +133,7 @@ var SendResultEmailPage = (function () {
         this.$j("#startDate").html("<b>" + this.quoteData.startDate + "</b>");
         this.$j("#finishDate").html("<b>" + this.quoteData.finishDate + "</b>");
         this.$j("#period").html("<b>" + this.quoteData.period + " day(s)</b>");
-        //this.updateCardInfo();
+        this.updateCardInfo();
         this.updateVisitorsInfo();
     };
     SendResultEmailPage.prototype.updateCardInfo = function () {

@@ -53,6 +53,12 @@ include_once('wp_shopping_cart_orders.php');
 include_once('class-coupon.php');
 include_once('includes/wspsc-cart-functions.php');
 
+/*
+div0 code
+*/
+// set quantity to 1 always
+//$_POST['cquantity'] = 1;
+
 function always_show_cart_handler($atts) {
     return print_wp_shopping_cart($atts);
 }

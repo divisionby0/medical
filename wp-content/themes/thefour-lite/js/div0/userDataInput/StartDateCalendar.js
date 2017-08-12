@@ -2,8 +2,6 @@ var StartDateCalendar = function(){
 
     var $ = jQuery.noConflict();
 
-    console.log("IM start date calendar");
-
     function updateInputs(year, month, day){
         $('#startDateMonth').val(month);
         $('#startDateYear').val(year);
@@ -37,23 +35,17 @@ var StartDateCalendar = function(){
     return{
         init:function(){
 
-            try{
-                var currentDate = DateUtils.getCurrentDate();
+            var currentDate = DateUtils.getCurrentDate();
 
-                $( "#startDateCalendarContainer" ).val(currentDate);
+            $( "#startDateCalendarContainer" ).val(currentDate);
 
-                $( "#startDateCalendarContainer" ).datepicker({onSelect: function(dateText) {
-                    onChange(dateText);
-                }, minDate: 0, defaultDate: new Date()});
+            $( "#startDateCalendarContainer" ).datepicker({onSelect: function(dateText) {
+                onChange(dateText);
+            }, minDate: 0, defaultDate: new Date()});
 
-                onChange(DateUtils.getCurrentDate());
+            onChange(DateUtils.getCurrentDate());
 
-                addListener();
-            }
-            catch(error){
-
-            }
-
+            addListener();
         }
     }
 };

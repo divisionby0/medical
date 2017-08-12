@@ -123,7 +123,9 @@ var CompanyModel = function(){
         var useSCCC = person.getIsUseSCCC();
 
         getDefaultRateTableGuideData(selectedAge, useSCCC);
+
         selectDefaultTable();
+        
         getCostPerDayForBenefitAndDefaultDeductible(selectedBenefit, selectedAge);
         
         if(costByDefaultDeductible == -1){
@@ -133,7 +135,11 @@ var CompanyModel = function(){
         }
 
         updateCostByDeductibleAmountOptionsTable();
+
         updateCostByPeriod(period);
+
+        //console.log("companyCostsByBenefitAndAge",companyCostsByBenefitAndAge);
+
         return companyCostsByBenefitAndAge;
     }
 
@@ -161,19 +167,37 @@ var CompanyModel = function(){
 
         var familyRateSinglePersonAge = familyRateAges[0];
         var person = persons.getPersonByAge(familyRateSinglePersonAge.toString());
+
         var costs = getCostsForPerson(person);
 
         var doubledCosts = new Map("costs");
+
 
         // double costs
         var keys = costs.getKeys();
         for(var i = 0; i < keys.length; i++){
             var key = keys[i];
             var cost = costs.get(key);
+            //console.log("key: "+key+"  cost: "+cost);
             var doubledCost = cost*2;
+
             doubledCosts.add(key, doubledCost);
         }
+
+        console.log("family rate doubled costs:",doubledCosts);
+        //companyDeductibles.updateCosts(costs);
         companyDeductibles.updateCosts(doubledCosts);
+
+        /*
+        for(var i=0; i<familyRateAges.length; i++){
+            var age = familyRateAges[i];
+
+            var person = persons.getPersonByAge(age.toString());
+            var costs = getCostsForPerson(person);
+
+            companyDeductibles.updateCosts(costs);
+        }
+        */
     }
 
     function calculateByIndividuals(persons){

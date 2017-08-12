@@ -5,8 +5,6 @@
 ///<reference path="cardDetailsPage/CardDetailsPage.ts"/>
 ///<reference path="applicationFinishPage/ApplicationFinishPage.ts"/>
 ///<reference path="sendResultEmailPage/SendResultEmailPage.ts"/>
-///<reference path="medIssuesSelectionPage/MedIssuesSelectionPage.ts"/>
-///<reference path="testing/QuizTestingPage.ts"/>
 declare var CompaniesByUserDataPage;
 declare var BenefitSelectionPage;
 declare var UserInputFormPage;
@@ -26,9 +24,6 @@ class PageFactory {
         else if(type == "cardDetailsPage"){
             return new CardDetailsPage();
         }
-        else if(type == "medicalIssuesSelectionPage"){
-            return new MedIssuesSelectionPage();
-        }
         else if(type == "applicationCreationPage"){
             return new ApplicationCreationPage();
         }
@@ -44,14 +39,8 @@ class PageFactory {
         else if(type == "simplePage"){
             return new UserInputFormPage();
         }
-        else if(type == "quizTestingPage"){
-            console.log("Loading Quiz testing page...");
-            return new QuizTestingPage();
-        }
-            /*
         else if(type == "datePickerYearAndMonthOnlyTestingPage"){
             return new DatePickerYearAndMonthOnlyTestingPage();
         }
-        */
     }
 }

@@ -1,6 +1,8 @@
 var RateTableGuide = function(){
+
     var dataProvider;
     var ageToGetDefaultDeductible = 60;
+
     function getDefaultDeductibleAndTable(age, useSccc){
         
         var strategy;

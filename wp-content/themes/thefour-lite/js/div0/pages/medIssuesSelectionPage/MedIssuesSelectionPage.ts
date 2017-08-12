@@ -50,6 +50,7 @@ class MedIssuesSelectionPage extends BasePage{
         //this.decorateApplicationIdWithCurrentDate();
         //this.saveApplicationId();
         this.updateApplicationIdContainer();
+        this.updatePayPalCostInput();
     }
 
     private loadQuotePersonsData():void {
@@ -191,4 +192,11 @@ class MedIssuesSelectionPage extends BasePage{
             });
         //this.cartCheckoutButton.click((event:any)=>this.onPayNowButtonClicked(event));
     }
+    
+    private updatePayPalCostInput():void{
+        var totalPremium:string = this.$j("input[name='totalPremiumValueInput']").val();
+        console.log("totalPremium: "+totalPremium);
+        this.$j("input[name='price']").val(totalPremium);
+    }
+    
 }

@@ -1,8 +1,3 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 ///<reference path="../BasePage.ts"/>
 ///<reference path="../../utils/QuoteSaver.ts"/>
 ///<reference path="../cardDetailsPage/Card.ts"/>
@@ -10,24 +5,22 @@ var __extends = (this && this.__extends) || function (d, b) {
 ///<reference path="../../../../../../plugins/medical_ensurance/js/db/DB.ts"/>
 ///<reference path="../../../../../../plugins/medical_ensurance/js/events/EventBus.ts"/>
 ///<reference path="../sendResultEmailPage/SendResultEmailPage.ts"/>
-///<reference path="../QuoteId.ts"/>
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var ApplicationFinishPage = (function (_super) {
     __extends(ApplicationFinishPage, _super);
     function ApplicationFinishPage() {
         _super.call(this);
-        console.log("Im application finish page");
+        this.card = this.getCard();
     }
     ApplicationFinishPage.prototype.create = function () {
         this.persons = this.getPersons();
         this.companyData = this.getCompany();
-        this.createQuoteId();
+        this.quoteId = Cookie.getQuoteId();
         this.loadQuotePersonsData();
-    };
-    ApplicationFinishPage.prototype.createQuoteId = function () {
-        console.log("app finish page creating quote id");
-        var savedAppId = this.$j("#appIdContainer").val();
-        console.log("outer app id: " + savedAppId);
-        this.quoteId = new QuoteId(savedAppId);
     };
     ApplicationFinishPage.prototype.onApplicationSaved = function () {
         var resultEmailPage = new SendResultEmailPage();
@@ -40,7 +33,6 @@ var ApplicationFinishPage = (function (_super) {
         var planData = StringUtils.parseURI(encodedPlanData);
         var encodedFormData = Cookie.getUserInputFormData();
         var formData = StringUtils.parseURI(encodedFormData);
-        console.log("formData:", formData);
         var startDate = formData.startDate.date;
         var finishDate = formData.finishDate.date;
         startDate = startDate.split("+")[0];
@@ -60,10 +52,8 @@ var ApplicationFinishPage = (function (_super) {
         var postalCode = Cookie.getSponsorPostalCode();
         var email = Cookie.getEmail();
         var phone = Cookie.getPhone();
-        var applicationType = Cookie.getApplicationType();
-        console.log("application type: " + applicationType);
         this.quoteDataToSave = {
-            quoteId: this.quoteId.getId(),
+            quoteId: this.quoteId,
             companyName: this.companyData.companyName,
             quoteData: quoteData,
             persons: this.personsData,
@@ -71,6 +61,10 @@ var ApplicationFinishPage = (function (_super) {
             numPersons: numPersons,
             startDate: startDate,
             finishDate: finishDate,
+            cardType: this.card.getType(),
+            cardHolderName: this.card.getHolderName(),
+            cardExpDate: this.card.getExpDate(),
+            cardNumber: this.card.getNumber(),
             countryOfOrigin: countryOfOrigin,
             visitorType: visitorType,
             arrivalDate: arrivalDate,
@@ -83,23 +77,38 @@ var ApplicationFinishPage = (function (_super) {
             province: province,
             postalCode: postalCode,
             email: email,
-            phone: phone,
-            type: applicationType,
-            state: "IN_PROGRESS"
+            phone: phone
         };
         this.$j("#quoteData").val(JSON.stringify(this.quoteDataToSave));
         quoteSaver.save(this.quoteDataToSave);
     };
+    ApplicationFinishPage.prototype.getCard = function () {
+        var card = new Card();
+        card.setExpDate(this.$j("#expirationDate").text());
+        card.setHolderName(this.$j("#cardholderName").text());
+        card.setNumber(this.$j("#cardNumber").text());
+        card.setType(this.$j("#cardType").text());
+        return card;
+    };
+    ApplicationFinishPage.prototype.decorateQuoteIdWithCurrentDate = function () {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth();
+        var day = now.getDate();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        this.quoteId = DateUtils.getCurrentDate() + "__" + hours + "-" + minutes + "-" + seconds;
+    };
     ApplicationFinishPage.prototype.onPersonsDataValid = function () {
-        console.log("persons data is valid. Data is: ", this.personsData);
-        //this.decorateQuoteIdWithCurrentDate();
+        this.decorateQuoteIdWithCurrentDate();
         this.saveApplication();
         this.$j("#quoteDate").text(this.$j("#quoteData").val());
         this.onApplicationSaved();
         this.deletePersonsTempData();
     };
     ApplicationFinishPage.prototype.deletePersonsTempData = function () {
-        DB.deletePersons(this.quoteId.getTempValue());
+        DB.deletePersons(this.quoteId);
     };
     ApplicationFinishPage.prototype.getCompany = function () {
         var companyDecodedData = Cookie.getSelectedCompanyData();
@@ -109,9 +118,7 @@ var ApplicationFinishPage = (function (_super) {
     ApplicationFinishPage.prototype.loadQuotePersonsData = function () {
         var _this = this;
         EventBus.addEventListener("personsDataLoadComplete", function (data) { return _this.personsDataLoadComplete(data); });
-        //DB.loadPersons(this.quoteId.getTempValue());
-        console.log("loading persons by app temp id " + this.quoteId.getTempValue());
-        DB.loadPersons(this.quoteId.getTempValue());
+        DB.loadPersons(this.quoteId);
     };
     ApplicationFinishPage.prototype.personsDataLoadComplete = function (data) {
         var _this = this;
@@ -119,7 +126,6 @@ var ApplicationFinishPage = (function (_super) {
         this.onPersonDataLoadComplete(data);
     };
     ApplicationFinishPage.prototype.onPersonDataLoadComplete = function (data) {
-        console.log("persons data: ", data);
         var dataIsValid = this.validatePersonsLoadedData(data);
         if (dataIsValid) {
             this.personsData = data;

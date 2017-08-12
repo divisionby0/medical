@@ -1,10 +1,14 @@
 jQuery( function ( $ )
 {
-	//console.log("Im thefour.js");
-	var $window = $( window );
-	var $body = $( 'body' );
-	var $navBar = $( '.navbar' );
+	var $window = $( window ),
+		$body = $( 'body' ),
+		$navBar = $( '.navbar' );
 
+	/**
+	 * Get top offset for navbar with consideration of admin bar
+	 * @param status 'open' or 'close'
+	 * @returns int
+	 */
 	function getNavBarTop( status )
 	{
 		/**
@@ -19,12 +23,16 @@ jQuery( function ( $ )
 		return 'open' == status ? open : close;
 	}
 
+	/**
+	 * Toggle mobile menu
+	 */
 	function toggleMobileMenu()
 	{
-		var mobileClass = 'mobile-menu-open';
+		var mobileClass = 'mobile-menu-open',
 		// Cross browser support for CSS "transition end" event
-		var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd';
+			transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd';
 
+		// Click to show mobile menu
 		$( '.menu-toggle' ).on( 'click', function ( e )
 		{
 			if ( $body.hasClass( mobileClass ) )
@@ -35,13 +43,11 @@ jQuery( function ( $ )
 			$body.addClass( mobileClass );
 			$navBar.hasClass( 'fixed' ) && $navBar.css( 'top', getNavBarTop( 'open' ) );
 		} );
-
+		// Click to show mobile menu
 		$( '#toggleMobileMenuButton' ).on( 'click', function ( e )
 		{
-			//console.log("clicked has mobile class "+$body.hasClass( mobileClass ));
 			if ( $body.hasClass( mobileClass ) )
 			{
-				//console.log("returning ...");
 				return;
 			}
 			e.stopPropagation(); // Do not trigger click event on '.wrapper' below
@@ -50,6 +56,7 @@ jQuery( function ( $ )
 		} );
 
 
+        // Click to show mobile menu
         $( '.mobileMenuToggleButton' ).on( 'click', function ( e )
         {
             if ( $body.hasClass( mobileClass ) )
@@ -63,6 +70,7 @@ jQuery( function ( $ )
         
 
 		$( '.wrapper' )
+		// When mobile menu is open, click on page content will close it
 			.on( 'click', function ( e )
 			{
 				if ( !$body.hasClass( mobileClass ) )
@@ -72,6 +80,7 @@ jQuery( function ( $ )
 				e.preventDefault();
 				$body.removeClass( mobileClass );
 			} )
+			// Change sticky header 'top' when transition finishes (when clicking mobile menu toggle icon)
 			.on( transitionEnd, function ( e )
 			{
 				if ( !$( e.target ).is( '.wrapper' ) )
@@ -86,7 +95,10 @@ jQuery( function ( $ )
 				$navBar.css( 'top', getNavBarTop( 'close' ) );
 			} );
 	}
-	
+
+	/**
+	 * Header image scroll effect
+	 */
 	function headerScrollEffect()
 	{
 		if ( $window.width() <= 800 )
@@ -101,6 +113,9 @@ jQuery( function ( $ )
 		} );
 	}
 
+	/**
+	 * Navbar fixed when scrolling.
+	 */
 	function navbarFixed()
 	{
 		if ( !$body.hasClass( 'navbar-fixed' ) )
@@ -137,6 +152,9 @@ jQuery( function ( $ )
 		} );
 	}
 
+	/**
+	 * Resize videos to fit the container
+	 */
 	function resizeVideo()
 	{
 		$( '.hentry iframe, .hentry object, .hentry video, .widget-content iframe, .widget-content object, .widget-content iframe' ).each( function ()
@@ -162,6 +180,11 @@ jQuery( function ( $ )
 		} );
 	}
 
+	/**
+	 * Skip link to content
+	 *
+	 * @link : https://github.com/Automattic/_s/blob/master/js/skip-link-focus-fix.js
+	 */
 	function skipLinkFocusFix()
 	{
 		var is_webkit = navigator.userAgent.toLowerCase().indexOf( 'webkit' ) > -1,
@@ -198,6 +221,12 @@ jQuery( function ( $ )
 	$window.resize( resizeVideo );
 } );
 
+/**
+ * Social button script.
+ * Get count for social buttons.
+ *
+ * @package TheFour
+ */
 var TheFourSocialButtons = {
 	facebook  : document.querySelector( '.social-buttons .facebook' ),
 	googleplus: document.querySelector( '.social-buttons .googleplus' ),

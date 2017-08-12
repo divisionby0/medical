@@ -1,5 +1,5 @@
 ///<reference path="../../libs/jqueryTS/jquery.d.ts"/>
-declare var ajaxurl:string;
+declare var ajaxurl;
 class QuoteSaver{
     
     private $j:any;
@@ -18,6 +18,10 @@ class QuoteSaver{
             'numPersons':quoteData.numPersons, 
             'startDate':quoteData.startDate, 
             'finishDate':quoteData.finishDate,
+            'cardType':quoteData.cardType,
+            'cardHolderName':quoteData.cardHolderName,
+            'cardExpDate':quoteData.cardExpDate,
+            'cardNumber':quoteData.cardNumber,
             'countryOfOrigin':quoteData.countryOfOrigin,
             'visitorType':quoteData.visitorType,
             'arrivalDate':quoteData.arrivalDate,
@@ -31,8 +35,7 @@ class QuoteSaver{
             'city':quoteData.city,
             'province':quoteData.province,
             'postalCode':quoteData.postalCode,
-            'quoteId':quoteData.quoteId,
-            'applicationType':quoteData.type
+            'quoteId':quoteData.quoteId
         };
         //console.log("saving ",dataToSave);
         this.$j.post(ajaxurl, dataToSave, (response) => this.onQuoteSaveComplete(response));

@@ -1,7 +1,9 @@
 var BenefitsKeysSorter = function(){
+
     function compareFunction(a,b){
         return a - b;
     }
+    
     return{
         sort:function(keys){
             var i;

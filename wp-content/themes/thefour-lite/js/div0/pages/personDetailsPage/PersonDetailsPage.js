@@ -21,7 +21,7 @@ var PersonDetailsPage = (function (_super) {
     function PersonDetailsPage() {
         _super.call(this);
         this.prevPage = "application-creation";
-        this.nextPage = "/medicalissusselectionpage";
+        this.nextPage = "/card-details";
         this.QUESTIONS = "QUESTIONS";
         this.CONFIRMATION = "CONFIRMATION";
         this.COMPLETE = "COMPLETE";
@@ -52,7 +52,6 @@ var PersonDetailsPage = (function (_super) {
         var quoteId = Cookie.getQuoteId();
         var personsData = this.persons.getData();
         var decodedPersonsData = escape(personsData);
-        alert("saving persons data quoteId=" + quoteId);
         DB.savePersons(decodedPersonsData, quoteId);
     };
     PersonDetailsPage.prototype.getUncompletePerson = function () {
@@ -156,7 +155,7 @@ var PersonDetailsPage = (function (_super) {
         console.log("navigate to " + page);
         //this.$j("#confirmationHeaderContainer").text("Please wait...");
         //this.$j("#personDetailsContainer").hide();
-        if (page == "/medicalissusselectionpage") {
+        if (page == "/card-details") {
             this.$j("#confirmationHeaderContainer").text("Please wait...");
             this.$j("#personDetailsContainer").hide();
             this.$j("#nextButton").hide();

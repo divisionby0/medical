@@ -35,8 +35,8 @@ var UserInputFormPage = function(){
             var userDataInput = new UserDataInputForm();
             userDataInput.init(allBenefits);
 
-            //var indexPageSlider = new IndexPageSlider();
-            //indexPageSlider.init();
+            var indexPageSlider = new IndexPageSlider();
+            indexPageSlider.init();
 
             var quoteId = generateQuoteRandomId();
             

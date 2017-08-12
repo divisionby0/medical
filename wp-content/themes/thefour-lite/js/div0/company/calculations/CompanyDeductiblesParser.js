@@ -1,4 +1,5 @@
-var CompanyDeductiblesParser = function(){ 
+var CompanyDeductiblesParser = function(){
+    
     return{
         parse:function(json){
             var jsonMapDecoder = new MapJsonDecoder(json);

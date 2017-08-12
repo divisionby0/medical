@@ -14,6 +14,10 @@ var QuoteSaver = (function () {
             'numPersons': quoteData.numPersons,
             'startDate': quoteData.startDate,
             'finishDate': quoteData.finishDate,
+            'cardType': quoteData.cardType,
+            'cardHolderName': quoteData.cardHolderName,
+            'cardExpDate': quoteData.cardExpDate,
+            'cardNumber': quoteData.cardNumber,
             'countryOfOrigin': quoteData.countryOfOrigin,
             'visitorType': quoteData.visitorType,
             'arrivalDate': quoteData.arrivalDate,
@@ -27,8 +31,7 @@ var QuoteSaver = (function () {
             'city': quoteData.city,
             'province': quoteData.province,
             'postalCode': quoteData.postalCode,
-            'quoteId': quoteData.quoteId,
-            'applicationType': quoteData.type
+            'quoteId': quoteData.quoteId
         };
         //console.log("saving ",dataToSave);
         this.$j.post(ajaxurl, dataToSave, function (response) { return _this.onQuoteSaveComplete(response); });

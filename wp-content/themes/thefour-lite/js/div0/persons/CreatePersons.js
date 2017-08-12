@@ -25,6 +25,10 @@ var CreatePersons = function(){
             benefit = data.benefit;
             useSCCC = data.useSccc;
             totalDays = data.totalDays;
+            
+
+            //console.log("ages: ");
+            //console.log(data.ages);
 
             createPersonsFromAges(data.ages);
 

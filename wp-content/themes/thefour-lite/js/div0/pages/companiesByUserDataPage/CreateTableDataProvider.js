@@ -1,4 +1,5 @@
 var CreateTableDataProvider = function(){
+
     return{
         execute:function(companies){
             var tableDataProvider = new List('tableDataProvider');

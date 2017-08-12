@@ -1,11 +1,16 @@
 var CompanyTableRowView = function(){
+
     var $ = jQuery.noConflict();
+
     var company;
+
     function createReadMoreLinkElement(url){
         return $('<div class="fullwidth centered resultTableTextDataReadMore"><a id="readMoreLink" href="'+url+'">read more</a></div>');
     }
     
     function createBuyOnlineButton(companyId, companyName){
+        //var medicalDeclarationRequired = isMedicalDeclarationRequired();
+        
         var button = $('<div class="buyButton centered" id="buyButton" data-companyId="'+companyId+'" data-companyName="'+companyName+'"><button type="button" class="btn btn-success">Order online</button></div>');
         createBuyOnlineButtonListener(button);
         return button;

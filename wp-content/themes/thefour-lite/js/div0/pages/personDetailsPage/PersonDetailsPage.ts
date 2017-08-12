@@ -22,7 +22,7 @@ class PersonDetailsPage extends BasePage{
     private currentPerson:QuotePerson;
 
     private prevPage:string = "application-creation";
-    private nextPage:string = "/medicalissusselectionpage";
+    private nextPage:string = "/card-details";
     
     private QUESTIONS:string = "QUESTIONS";
     private CONFIRMATION:string = "CONFIRMATION";
@@ -68,11 +68,11 @@ class PersonDetailsPage extends BasePage{
     }
 
     private savePersonsData():void{
-       
+
         var quoteId:string = Cookie.getQuoteId();
+
         var personsData:string = this.persons.getData();
         var decodedPersonsData:string = escape(personsData);
-        alert("saving persons data quoteId="+quoteId);
         DB.savePersons(decodedPersonsData, quoteId);
     }
     
@@ -198,8 +198,8 @@ class PersonDetailsPage extends BasePage{
 
         //this.$j("#confirmationHeaderContainer").text("Please wait...");
         //this.$j("#personDetailsContainer").hide();
-        
-        if(page == "/medicalissusselectionpage"){
+
+        if(page == "/card-details"){
             this.$j("#confirmationHeaderContainer").text("Please wait...");
             this.$j("#personDetailsContainer").hide();
             this.$j("#nextButton").hide();

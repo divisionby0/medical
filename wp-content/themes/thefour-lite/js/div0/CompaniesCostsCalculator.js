@@ -1,4 +1,5 @@
 var CompaniesCostsCalculator = function(){
+
     return{
         execute:function(persons, companies, selectedBenefit, period){
             var companiesIterator = companies.getIterator();

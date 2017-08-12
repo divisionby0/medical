@@ -37,6 +37,7 @@ var MedIssuesSelectionPage = (function (_super) {
         //this.decorateApplicationIdWithCurrentDate();
         //this.saveApplicationId();
         this.updateApplicationIdContainer();
+        this.updatePayPalCostInput();
     };
     MedIssuesSelectionPage.prototype.loadQuotePersonsData = function () {
         var _this = this;
@@ -157,6 +158,11 @@ var MedIssuesSelectionPage = (function (_super) {
             this.onclick = null;
         });
         //this.cartCheckoutButton.click((event:any)=>this.onPayNowButtonClicked(event));
+    };
+    MedIssuesSelectionPage.prototype.updatePayPalCostInput = function () {
+        var totalPremium = this.$j("input[name='totalPremiumValueInput']").val();
+        console.log("totalPremium: " + totalPremium);
+        this.$j("input[name='price']").val(totalPremium);
     };
     return MedIssuesSelectionPage;
 }(BasePage));

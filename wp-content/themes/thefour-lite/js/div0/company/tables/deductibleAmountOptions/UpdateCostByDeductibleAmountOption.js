@@ -1,7 +1,11 @@
 var UpdateCostByDeductibleAmountOption = function(){
+
     var table;
+
     function updateCompanyCostsByBenefitAndAge(collection, baseCost){
+
         var keys = collection.getKeys();
+
         for(var i = 0; i < keys.length; i++){
             var key = keys[i];
             var procent = collection.get(key);
@@ -11,6 +15,8 @@ var UpdateCostByDeductibleAmountOption = function(){
 
         return collection;
     }
+
+
     return{
         setTable:function(_table){
             table = _table;
@@ -23,7 +29,13 @@ var UpdateCostByDeductibleAmountOption = function(){
             
             for(var i=0;i<deductibles.length; i++) {
                 var deductible = deductibles[i];
+
+                //console.log("deductible "+deductible+"  age = "+age);
+
                 var optionsList = table.getSurchargeOrDiscountProcent(deductible, benefit, age);
+                //console.log("Options: ");
+                //console.log(optionsList);
+
                 var listIterator = optionsList.getIterator();
 
                 while (listIterator.hasNext()) {
@@ -34,6 +46,7 @@ var UpdateCostByDeductibleAmountOption = function(){
                     var optionBenefit = option.benefit;
 
                     if (optionBenefit == benefit || optionBenefit == 'any') {
+                        //console.log("For deductible " + deductible + "  procent is:" + optionProcent);
                         try{
                             companyCostsByBenefitAndAge.add(optionDeductible, optionProcent);
                         }
@@ -42,6 +55,9 @@ var UpdateCostByDeductibleAmountOption = function(){
                     }
                 }
             }
+
+
+
             companyCostsByBenefitAndAge = updateCompanyCostsByBenefitAndAge(companyCostsByBenefitAndAge, baseCost);
             return companyCostsByBenefitAndAge;
         }

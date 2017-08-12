@@ -178,8 +178,9 @@ class PersonsAdditionalDataRequestView{
         console.log("createArrivalDatePicker");
         console.log("default date: ", new Date());
         this.arrivalDateControl.datepicker({
+            minDate:0,
             changeYear: true,
-            yearRange:'-1:+10',
+            yearRange:'-0:+10',
             defaultDate: new Date(),
             onSelect: (dateText)=>this.onArrivalDateSelected(dateText)
         });

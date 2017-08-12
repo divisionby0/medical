@@ -1,6 +1,8 @@
 var SortCompaniesByZeroDeductibleCost = function(){
+
     function zeroDeductibleCompareAscendingFunction(companyObject1, companyObject2){
         return companyObject1.zeroDeductible - companyObject2.zeroDeductible;
+        //return companyObject2.zeroDeductible - companyObject1.zeroDeductible;
     }
     function zeroDeductibleCompareDescendingFunction(companyObject1, companyObject2){
         return companyObject2.zeroDeductible - companyObject1.zeroDeductible;
@@ -36,6 +38,7 @@ var SortCompaniesByZeroDeductibleCost = function(){
 
             sortAscending(arr);
             //sortDescending(arr);
+
             for(var i=0; i<arr.length; i++){
                 var companyObject = arr[i];
                 var companyId = companyObject.companyId;

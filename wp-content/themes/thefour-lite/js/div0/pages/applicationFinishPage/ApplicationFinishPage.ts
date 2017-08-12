@@ -5,33 +5,29 @@
 ///<reference path="../../../../../../plugins/medical_ensurance/js/db/DB.ts"/>
 ///<reference path="../../../../../../plugins/medical_ensurance/js/events/EventBus.ts"/>
 ///<reference path="../sendResultEmailPage/SendResultEmailPage.ts"/>
-///<reference path="../QuoteId.ts"/>
+
 declare function escape(s:string): string;
 declare function unescape(s:string): string;
 declare var DateUtils:any;
 class ApplicationFinishPage extends BasePage{
+
     private companyData:any;
-    private quoteId:QuoteId;
+    private card:Card;
+    private quoteId:string;
     private personsData:string;
+
     private quoteDataToSave:any;
 
     constructor(){
         super();
-        console.log("Im application finish page");
+        this.card = this.getCard();
     }
     
     public create():void{
         this.persons = this.getPersons();
         this.companyData = this.getCompany();
-        this.createQuoteId();
+        this.quoteId = Cookie.getQuoteId();
         this.loadQuotePersonsData();
-    }
-    
-    private createQuoteId():void{
-        console.log("app finish page creating quote id");
-        var savedAppId:string = this.$j("#appIdContainer").val();
-        console.log("outer app id: "+savedAppId);
-        this.quoteId = new QuoteId(savedAppId);
     }
     
     private onApplicationSaved():void{
@@ -49,8 +45,6 @@ class ApplicationFinishPage extends BasePage{
 
         var encodedFormData:string = Cookie.getUserInputFormData();
         var formData:any = StringUtils.parseURI(encodedFormData);
-        
-        console.log("formData:",formData);
 
         var startDate:string = formData.startDate.date;
         var finishDate:string = formData.finishDate.date;
@@ -81,12 +75,8 @@ class ApplicationFinishPage extends BasePage{
         var email:string = Cookie.getEmail();
         var phone:string = Cookie.getPhone();
 
-        var applicationType:string = Cookie.getApplicationType();
-
-        console.log("application type: "+applicationType);
-        
         this.quoteDataToSave = {
-            quoteId:this.quoteId.getId(),
+            quoteId:this.quoteId,
             companyName:this.companyData.companyName,
             quoteData:quoteData,
             persons:this.personsData,
@@ -94,6 +84,10 @@ class ApplicationFinishPage extends BasePage{
             numPersons:numPersons,
             startDate:startDate,
             finishDate:finishDate,
+            cardType:this.card.getType(),
+            cardHolderName:this.card.getHolderName(),
+            cardExpDate:this.card.getExpDate(),
+            cardNumber:this.card.getNumber(),
             countryOfOrigin:countryOfOrigin,
             visitorType:visitorType,
             arrivalDate:arrivalDate,
@@ -106,21 +100,39 @@ class ApplicationFinishPage extends BasePage{
             province:province,
             postalCode:postalCode,
             email:email,
-            phone:phone,
-            type:applicationType,
-            state:"IN_PROGRESS"
+            phone:phone
         };
 
         this.$j("#quoteData").val(JSON.stringify(this.quoteDataToSave));
 
         quoteSaver.save(this.quoteDataToSave);
     }
-    
-    private onPersonsDataValid():void {
 
-        console.log("persons data is valid. Data is: ",this.personsData);
-        
-        //this.decorateQuoteIdWithCurrentDate();
+    private getCard():Card{
+        var card:Card = new Card();
+        card.setExpDate(this.$j("#expirationDate").text());
+        card.setHolderName(this.$j("#cardholderName").text());
+        card.setNumber(this.$j("#cardNumber").text());
+        card.setType(this.$j("#cardType").text());
+
+        return card;
+    }
+    
+    private decorateQuoteIdWithCurrentDate():void{
+        var now:any = new Date();
+        var year:string = now.getFullYear();
+        var month:string = now.getMonth();
+        var day:string = now.getDate();
+
+        var hours:string = now.getHours();
+        var minutes:string = now.getMinutes();
+        var seconds:string = now.getSeconds();
+
+        this.quoteId = DateUtils.getCurrentDate()+"__"+hours+"-"+minutes+"-"+seconds;
+    }
+
+    private onPersonsDataValid():void {
+        this.decorateQuoteIdWithCurrentDate();
         this.saveApplication();
 
         this.$j("#quoteDate").text(this.$j("#quoteData").val());
@@ -131,7 +143,7 @@ class ApplicationFinishPage extends BasePage{
     }
 
     private deletePersonsTempData():void {
-        DB.deletePersons(this.quoteId.getTempValue());
+        DB.deletePersons(this.quoteId);
     }
 
     private getCompany():any{
@@ -142,9 +154,7 @@ class ApplicationFinishPage extends BasePage{
 
     private loadQuotePersonsData():void {
         EventBus.addEventListener("personsDataLoadComplete", (data)=>this.personsDataLoadComplete(data));
-        //DB.loadPersons(this.quoteId.getTempValue());
-        console.log("loading persons by app temp id "+this.quoteId.getTempValue());
-        DB.loadPersons(this.quoteId.getTempValue());
+        DB.loadPersons(this.quoteId);
     }
 
     private personsDataLoadComplete(data:string):void {
@@ -153,9 +163,8 @@ class ApplicationFinishPage extends BasePage{
     }
 
     private onPersonDataLoadComplete(data:string):void {
-        console.log("persons data: ",data);
         var dataIsValid:boolean = this.validatePersonsLoadedData(data);
-        
+
         if(dataIsValid){
             this.personsData = data;
             this.onPersonsDataValid();

@@ -2778,7 +2778,7 @@ var PersonDetailsPage = (function (_super) {
         var quoteId = Cookie.getQuoteId();
         var personsData = this.persons.getData();
         var decodedPersonsData = escape(personsData);
-        //alert("saving persons data quoteId="+quoteId);
+        alert("saving persons data quoteId="+quoteId);
         DB.savePersons(decodedPersonsData, quoteId);
     };
     PersonDetailsPage.prototype.getUncompletePerson = function () {
@@ -3042,7 +3042,6 @@ var MedIssuesSelectionPage = (function (_super) {
         //this.decorateApplicationIdWithCurrentDate();
         //this.saveApplicationId();
         this.updateApplicationIdContainer();
-        //this.updatePayPalCostInput();
     };
     MedIssuesSelectionPage.prototype.loadQuotePersonsData = function () {
         var _this = this;
@@ -3164,11 +3163,6 @@ var MedIssuesSelectionPage = (function (_super) {
             });
 
         //this.cartCheckoutButton.click(function (event) { return _this.onPayNowButtonClicked(event); });
-    };
-    MedIssuesSelectionPage.prototype.updatePayPalCostInput = function () {
-        var totalPremium = this.$j("input[name='totalPremiumValueInput']").val();
-        console.log("totalPremium: " + totalPremium);
-        this.$j("input[name='price']").val(totalPremium);
     };
     return MedIssuesSelectionPage;
 }(BasePage));

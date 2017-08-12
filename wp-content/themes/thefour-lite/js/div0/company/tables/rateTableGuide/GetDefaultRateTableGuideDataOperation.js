@@ -1,5 +1,7 @@
 var GetDefaultRateTableGuideDataOperation = function(){
+    
     var strategy;
+    
     return{
         setStrategy:function(_strategy){
             strategy = _strategy;

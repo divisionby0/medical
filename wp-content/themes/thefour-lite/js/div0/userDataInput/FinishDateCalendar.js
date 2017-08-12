@@ -30,24 +30,19 @@ var FinishDateCalendar = function(){
     return{
         init:function(){
 
-            try{
-                var tomorrowDate = DateUtils.getTomorrowDate();
+            var tomorrowDate = DateUtils.getTomorrowDate();
 
-                var tomorrow = new Date();
-                tomorrow.setDate(tomorrow.getDate() + 1);
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
 
-                $( "#finishDateCalendarContainer" ).val(tomorrowDate);
+            $( "#finishDateCalendarContainer" ).val(tomorrowDate);
 
-                $( "#finishDateCalendarContainer" ).datepicker({onSelect: function(dateText) {
-                    onChange(dateText);
-                }, minDate: +1, defaultDate: tomorrow});
+            $( "#finishDateCalendarContainer" ).datepicker({onSelect: function(dateText) {
+                onChange(dateText);
+            }, minDate: +1, defaultDate: tomorrow});
 
-                onChange(tomorrowDate);
-                addListener();
-            }
-            catch(error){
-
-            }
+            onChange(tomorrowDate);
+            addListener();
         }
     }
 }

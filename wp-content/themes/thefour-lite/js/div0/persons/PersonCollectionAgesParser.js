@@ -1,7 +1,9 @@
 var PersonCollectionAgesParser = (function(){
+
     function sortingFunction(a, b){
         return a-b
     }
+
     return{
         parse:function(persons){
             var ages = new Array();

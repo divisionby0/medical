@@ -27,10 +27,11 @@ class SelectedCompanyDataView
     }
 
     protected function createContent(){
+        $planCostValueData = explode(" ", $this->planCost);
         echo '<div class="col-sm-3 centered">Company<p><b id="companyNameContainer">'.$this->companyName.'</b></p></div>';
         echo '<div class="col-sm-3 centered">Benefit<p><b id="selectedBenefitContainer">'.$this->benefit.'</b></p></div>';
         echo '<div class="col-sm-3 centered">Deductible<p><b id="selectedDeductibleContainer">'.$this->planDeductible.'</b></p></div>';
-        echo '<div class="col-sm-3 centered">Total premium<p><b id="selectedPremiumContainer">'.$this->planCost.'</b></p></div>';
+        echo '<div class="col-sm-3 centered">Total premium<p><b id="selectedPremiumContainer">'.$this->planCost.'</b><input name="totalPremiumValueInput" type="hidden" value="'.$planCostValueData[1].'"></p></div>';
     }
 
     protected function createPostfix(){

@@ -17,12 +17,21 @@ echo '<div id="pageType" style="display: none;">simplePage</div>';
 		<?php
 		if ( comments_open() || get_comments_number() || ! is_front_page() )
 		{
-			comments_template('', true );
+			comments_template( '', true );
 		}
 		?>
 
 	<?php endif; ?>
 
 </section>
+<?php
+/*
+if ( is_front_page() )
+{
+	get_template_part( 'template-parts/front-page', 'blog' );
+	get_template_part( 'template-parts/front-page', 'flourish' );
+}
+*/
+?>
 
 <?php get_footer(); ?>

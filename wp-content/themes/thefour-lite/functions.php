@@ -392,6 +392,12 @@ function saveApplicationHTML(){
 	echo json_encode($returnValue);
 	die();
 }
+
+function redirectToPayPalCheckOut(){
+	echo simplePayPalCartPluginRedirectToCheckOut();
+	wp_die(); // this is required to terminate immediately and return a proper response
+}
+
 function wp_insert_quote(IApplicationPostType $post, $wp_error = false)
 {
 	$post_id = wp_insert_post($post->get_post_data(), $wp_error);
@@ -405,6 +411,12 @@ function wp_insert_quote(IApplicationPostType $post, $wp_error = false)
 }
 add_action( 'wp_ajax_sendApplicationAdminEmail', 'sendApplicationAdminEmail');
 add_action( 'wp_ajax_nopriv_sendApplicationAdminEmail', 'sendApplicationAdminEmail' );
+
+// fucking paypal shopping cart plugin
+add_action( 'wp_ajax_redirectToPayPalCheckOut', 'redirectToPayPalCheckOut');
+add_action( 'wp_ajax_nopriv_redirectToPayPalCheckOut', 'redirectToPayPalCheckOut' );
+
+
 add_action( 'wp_ajax_sendResultFormEmail', 'sendResultFormEmail');
 add_action( 'wp_ajax_nopriv_sendResultFormEmail', 'sendResultFormEmail' );
 add_action( 'wp_ajax_saveApplicationHTML', 'saveApplicationHTML');

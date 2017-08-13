@@ -17,11 +17,19 @@ $decodedPlanData = json_decode(json_encode($decodedPlanData), true);
 
 $planCost = $decodedPlanData['cost'];
 
+//$GlobalTotalPremium = $planCost;
+//global $GloblaPersonID;
 
-$GlobalTotalPremium = $planCost;
-global $GloblaPersonID;
-/*	»»»	»»»	»»»*/
+$_POST['price'] = $planCost;
+$_POST['wspsc_product'] = Cookie::getQuoteId();
+
+clearCart();
+
+hookCartDataCaching();
+
 get_header('noImage');
+addToCart();
+
 echo '<div id="pageType" style="display: none;">medicalIssuesSelectionPage</div>';
 echo '<div id="paymentResultCallbackPageUrl" style="display: none;">'.get_site_url().'/payment-complete-page</div>';
 new UserSelectionFinishPageView();
@@ -32,9 +40,37 @@ echo '<div class="centered"><h1>Please select</h1><label class="radio-inline"><i
 echo '<div style="float: right;"><button type="button" class="btn btn-success" id="finishButton" style="float: right; margin-left: 10px; display: none;">Proceed to payment</button>        <button type="button" class="btn btn-warning" id="prevButton" style="float: right;">Prev</button></div>';
 echo '<div class="centered" id="paypalButtonContainer">';
 
-echo print_wp_cart_button_for_product($GlobalPersonID, $GlobalTotalPremium);
-//	»»» display the shopping cart content;
+echo "<a href='#' id='checkOutButton'>Pay Now !</a>";
+echo print_wp_cart_button_for_product(Cookie::getQuoteId(), $planCost);
+
 echo print_wp_shopping_cart();
 
 echo '</div>';
+
+echo '<script type="application/javascript">
+console.log("@@@@@@@@@@@@@@@@@@");
+
+jQuery(document).ready(function($) {
+        $("#checkOutButton").click(onCheckOutButtonClicked);
+        
+        function onCheckOutButtonClicked(){
+            console.log("onCheckOutButtonClicked");
+            executeAjaxCall();
+        }
+        
+        function executeAjaxCall(){
+            var data = {
+                \'action\': \'redirectToPayPalCheckOut\'
+            };
+    
+            // since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
+            jQuery.post(ajaxurl, data, function(response) {
+                window.location.href = response;
+            });
+        }
+	});
+
+
+</script>';
+
 get_footer();

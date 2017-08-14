@@ -4,7 +4,8 @@ class BenefitSelectionForm
 {
     public function __construct(Map $data)
     {
-        echo '<form action="companies-by-user-data" method="post" id="benefitSelectionForm">';
+        $submitUrl = site_url()."/companies-by-user-data";
+        echo '<form action="'.$submitUrl.'" method="post" id="benefitSelectionForm">';
         echo '<table id="benefitsSelectionTable" style="width: 100%;">';
         echo '<tr><td class="centered bold">Select benefit</td><td class="centered bold">Total premium</td></tr>';
 

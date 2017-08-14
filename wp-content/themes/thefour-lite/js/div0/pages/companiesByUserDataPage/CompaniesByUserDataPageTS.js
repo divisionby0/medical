@@ -11,6 +11,7 @@ var CompaniesByUserDataPageTS = (function (_super) {
     __extends(CompaniesByUserDataPageTS, _super);
     function CompaniesByUserDataPageTS() {
         _super.call(this);
+        this.prevPage = "benefits-by-user-data-and-zero-deductible";
         this.period = Cookie.getPeriod();
     }
     CompaniesByUserDataPageTS.prototype.create = function () {
@@ -43,6 +44,14 @@ var CompaniesByUserDataPageTS = (function (_super) {
         this.companiesTable.setData(tableDataProvider);
         var resultTableEmail = new ResultTableEmail();
         resultTableEmail.init();
+        this.prevButton = this.$j('#prevButton');
+        this.prevButton.on("click", function () { return _this.prevButtonClickHandler(); });
+    };
+    CompaniesByUserDataPageTS.prototype.prevButtonClickHandler = function () {
+        this.navigateToPrevPage();
+    };
+    CompaniesByUserDataPageTS.prototype.navigateToPrevPage = function () {
+        NavigatorUtil.navigateTo(this.prevPage);
     };
     CompaniesByUserDataPageTS.prototype.onBuyOnlineButtonClickedHandler = function (data) {
         var companyData = { companyName: data.name, companyId: data.id, medicalDeclarationRequired: data.medicalDeclarationRequired, benefit: this.selectedBenefit, deductiblesCosts: null };

@@ -66,6 +66,7 @@ function print_wp_shopping_cart($args = array()) {
     //$return_url = "http://thankuoy_111/";
     $urls .= '<input id="callbackUrl" type="hidden" name="return" value="' . $return_url . '" />';
 
+
     $cancel = get_option('cart_cancel_from_paypal_url');
     if(isset($cancel) && !empty($cancel)){
         $urls .= '<input type="hidden" name="cancel_return" value="' . $cancel . '" />';

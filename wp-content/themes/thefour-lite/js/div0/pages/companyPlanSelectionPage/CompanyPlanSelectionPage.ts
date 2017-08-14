@@ -1,4 +1,3 @@
-///<reference path="../../Cookie.ts"/>
 ///<reference path="../views/SelectionForm.ts"/>
 ///<reference path="CompanyPlanSelectionForm.ts"/>
 ///<reference path="../../../../../../plugins/medical_ensurance/js/collections/json/MapJsonDecoder.ts"/>
@@ -7,7 +6,10 @@ declare var StringUtils;
 class CompanyPlanSelectionPage{
     private $j:any;
 
+    private prevPage:string = "companies-by-user-data";
     private nextPage:string = "/application-creation";
+
+    private prevButton:any;
 
     private companyCosts:Map<string>;
     
@@ -21,11 +23,23 @@ class CompanyPlanSelectionPage{
         var mapDecoder:MapJsonDecoder = new MapJsonDecoder(companyData.deductiblesCosts);
         this.companyCosts = mapDecoder.decode();
         this.createCostSelectionForm();
+
+        this.prevButton = this.$j('#prevButton');
+        this.prevButton.on("click", ()=>this.prevButtonClickHandler());
+
         EventBus.addEventListener("COMPANY_PLAN_SELECTED", (data)=>this.companyPlanSelectedHandler(data));
     }
 
     private navigateToNextPage():void{
         NavigatorUtil.navigateTo(this.nextPage);
+    }
+
+    private navigateToPrevPage():void{
+        NavigatorUtil.navigateTo(this.prevPage);
+    }
+
+    private prevButtonClickHandler():void{
+        this.navigateToPrevPage();
     }
 
     private getCompany():any{

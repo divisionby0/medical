@@ -7,6 +7,8 @@ var BenefitSelectionPage = function(){
     var benefitsSelectionForm;
 
     var $ = jQuery.noConflict();
+    var prevButton;
+    var prevPage;
 
     function createPersons() {
 
@@ -24,7 +26,7 @@ var BenefitSelectionPage = function(){
             if(i==0){
                 person.setRelationship(PRIMARY);
             }
-            
+
             personsCollection.add(person);
         }
     }
@@ -44,6 +46,11 @@ var BenefitSelectionPage = function(){
         benefitsSelectionForm.submit();
     }
 
+    function onPrevButtonClicked(){
+        console.log("prev clicked");
+        NavigatorUtil.navigateTo(prevPage);
+    }
+
     return{
         create:function(){
 
@@ -52,21 +59,28 @@ var BenefitSelectionPage = function(){
             var savedFormData = Cookie.getUserInputFormData();
             parsedData = StringUtils.parseURI(savedFormData);
 
-            console.log("parsedData",parsedData);
+            //console.log("parsedData",parsedData);
 
             if(!parsedData){
                 parsedData = {benefit:null};
             }
             savedBenefit = parsedData.benefit;
-            
+
             useSCCC = parsedData.useSccc == "Yes" ? true : false;
-            console.log("useSCCC="+useSCCC);
+            //console.log("useSCCC="+useSCCC);
 
             createPersons();
             savePersons();
             savePeriod();
 
             benefitsSelectionForm = new BenefitSelectionFormTS(savedBenefit, "selectedBenefitInput", "benefitSelectionForm", "benefitsSelectionTable");
+
+            prevPage = $("#baseUrl").text();
+
+            prevButton = $("#prevButton");
+            prevButton.click(function(){
+                onPrevButtonClicked();
+            });
         }
     }
 };

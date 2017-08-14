@@ -24,4 +24,12 @@ new CompanyCostsView($companyName, $costs);
 echo "<div class='benefitsSelectionPageContentContainer'>";
 new DeductibleSelectionPageTextContent();
 echo "</div>";
+showPrevButton();
+
+function showPrevButton(){
+    echo '<div style="float: right; padding-top: 20px;">
+        <button type="button" class="btn btn-warning" id="prevButton" style="float: right;">Prev</button>
+    </div>';
+}
+
 get_footer();

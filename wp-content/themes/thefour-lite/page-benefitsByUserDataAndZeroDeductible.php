@@ -13,7 +13,20 @@ try{
     $formData = $formDataParser->getData();
 }
 catch(Exception $exception){
-    $state = 'error';
+    // no form data - need to check cookie for actual information
+    $savedData = Cookie::getUserInputFormData();
+    $savedFormData = Cookie::getUserInputFormData();
+
+    $savedFormData = StringUtil::unquote($savedFormData);
+    $formData = json_decode($savedFormData);
+    $formData = json_decode(json_encode($formData), true);
+
+    $startDate = $formData['startDate']["date"];
+    $finishDate = $formData['finishDate']["date"];
+
+    if(!isset($formData)){
+        $state = 'error';
+    }
 }
 
 if($state == 'normal'){
@@ -30,6 +43,7 @@ if($state == 'normal'){
 get_header('noImage');
 
 echo '<div id="formData" style="display: none;">'.json_encode($formData).'</div>';
+echo '<div id="baseUrl" style="display: none;">'.site_url().'</div>';
 echo '<div id="pageType" style="display: none;">benefitsByUserDataAndZeroDeductiblePage</div>';
 //$ages = json_decode(stripslashes($formData["ages"]));
 
@@ -82,6 +96,7 @@ function createPage($formData){
     echo "<div class='benefitsSelectionPageContentContainer'>";
     new BenefitsSelectionPageTextContent();
     echo "</div>";
+    showPrevButton();
 }
 
 function getCompaniesBenefitsByZeroDeductible(Map $allBenefits, $companiesDataProvider){
@@ -172,9 +187,13 @@ function removeNegativeCosts(Map $collection){
     return $updatedMap;
 }
 
-
 function createAgesString($ages){
     return implode(',',$ages);
 }
 
+function showPrevButton(){
+    echo '<div style="float: right; padding-top: 20px;">
+        <button type="button" class="btn btn-warning" id="prevButton" style="float: right;">Prev</button>
+    </div>';
+}
 get_footer();

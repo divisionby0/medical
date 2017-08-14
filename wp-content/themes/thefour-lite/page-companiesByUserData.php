@@ -42,6 +42,12 @@ function updateBenefitSavedData($savedBenefit){
     Cookie::setUserInputFormData(json_encode($formData));
 }
 
+function showPrevButton(){
+    echo '<div style="float: right; padding-top: 20px;">
+        <button type="button" class="btn btn-warning" id="prevButton" style="float: right;">Prev</button>
+    </div>';
+}
+
 function createPage($formData){
     $ages = $formData["ages"];
 
@@ -61,7 +67,7 @@ function createPage($formData){
     $benefit = StringUtil::formatMoneyInt($benefit);
 
     get_template_part('template-parts/result', 'sendQuoteToEmail');
-
+    
     echo '<div id="resultPageContent">';
 
     echo '<div class="userDataSelectionInfoContainer"><span style="margin-left: 20px;">Age(s):'.$agesString.'</span><span style="margin-left: 20px;">    Benefit: '.$benefit.'</span><span style="margin-left: 20px;">    Period:'.$formData["totalDays"].' day(s)</span><span style="margin-left: 20px;">  '.$medicalConditionRemark.'</span></div>';
@@ -72,6 +78,7 @@ function createPage($formData){
     // все расчеты по family rate происходят в JS
     new ResultTable($companiesDataProvider);
     echo '</div>';
+    showPrevButton();
 }
 
 get_footer();

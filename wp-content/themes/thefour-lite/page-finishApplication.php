@@ -11,7 +11,14 @@ echo '<div id="cardType" style="display: none;">'.$_POST["cardTypeFormData"].'</
 
 echo '<input id="quoteData" style="display: none;">';
 
-//$appId = $_GET["appId"];
+echo '<div>';
+echo '<div>ALL of $_GET parameters: </div>';
+var_dump($_GET);
+echo '</div>';
+
+$appId = $_GET["appId"];
+
+echo '<h1>app ID from PayPal:'.$appId.'</h1>';
 
 echo '<input id="appIdContainer" value="'.Cookie::getQuoteId().'" type="hidden"></input>';
 

@@ -2668,6 +2668,7 @@ var CompaniesByUserDataPageTS = (function (_super) {
     __extends(CompaniesByUserDataPageTS, _super);
     function CompaniesByUserDataPageTS() {
         _super.call(this);
+        this.prevPage = "benefits-by-user-data-and-zero-deductible";
         this.period = Cookie.getPeriod();
     }
     CompaniesByUserDataPageTS.prototype.create = function () {
@@ -2700,6 +2701,14 @@ var CompaniesByUserDataPageTS = (function (_super) {
         this.companiesTable.setData(tableDataProvider);
         var resultTableEmail = new ResultTableEmail();
         resultTableEmail.init();
+        this.prevButton = this.$j('#prevButton');
+        this.prevButton.on("click", function () { return _this.prevButtonClickHandler(); });
+    };
+    CompaniesByUserDataPageTS.prototype.prevButtonClickHandler = function () {
+        this.navigateToPrevPage();
+    };
+    CompaniesByUserDataPageTS.prototype.navigateToPrevPage = function () {
+        NavigatorUtil.navigateTo(this.prevPage);
     };
     CompaniesByUserDataPageTS.prototype.onBuyOnlineButtonClickedHandler = function (data) {
         var companyData = { companyName: data.name, companyId: data.id, medicalDeclarationRequired: data.medicalDeclarationRequired, benefit: this.selectedBenefit, deductiblesCosts: null };
@@ -3456,52 +3465,88 @@ var UserInputFormPage = function(){
 
 // BenefitSelectionPage
 var BenefitSelectionPage = function(){
+
     var personsCollection;
     var parsedData;
     var useSCCC;
     var savedBenefit;
     var benefitsSelectionForm;
+
     var $ = jQuery.noConflict();
+    var prevButton;
+    var prevPage;
+
     function createPersons() {
+
+        // detect is collection exists at the cookie
+
         personsCollection = new QuotePersonCollection();
+
         for(var i = 0; i<parsedData.ages.length; i++ ){
             var age = parsedData.ages[i];
+
             var person = new QuotePerson(age);
             person.setIsUseSCCC(useSCCC);
             person.setPeriod(parsedData.totalDays);
+
             if(i==0){
                 person.setRelationship(PRIMARY);
             }
+
             personsCollection.add(person);
         }
     }
+
     function savePersons(){
         var personsData = personsCollection.getData();
         Cookie.setPersons(personsData);
     }
+
     function savePeriod(){
         var period = parsedData.totalDays;
         Cookie.setPeriod(period);
     }
+
     function benefitSelectedHandler(benefit){
         Cookie.setBenefit(benefit);
         benefitsSelectionForm.submit();
     }
+
+    function onPrevButtonClicked(){
+        console.log("prev clicked");
+        NavigatorUtil.navigateTo(prevPage);
+    }
+
     return{
         create:function(){
 
             EventBus.addEventListener("BENEFIT_SELECTED", benefitSelectedHandler);
+
             var savedFormData = Cookie.getUserInputFormData();
             parsedData = StringUtils.parseURI(savedFormData);
+
+            //console.log("parsedData",parsedData);
+
             if(!parsedData){
                 parsedData = {benefit:null};
             }
             savedBenefit = parsedData.benefit;
+
             useSCCC = parsedData.useSccc == "Yes" ? true : false;
+            //console.log("useSCCC="+useSCCC);
+
             createPersons();
             savePersons();
             savePeriod();
+
             benefitsSelectionForm = new BenefitSelectionFormTS(savedBenefit, "selectedBenefitInput", "benefitSelectionForm", "benefitsSelectionTable");
+
+            prevPage = $("#baseUrl").text();
+
+            prevButton = $("#prevButton");
+            prevButton.click(function(){
+                onPrevButtonClicked();
+            });
         }
     }
 };
@@ -3509,6 +3554,7 @@ var BenefitSelectionPage = function(){
 // CompanyPlanSelectionPage
 var CompanyPlanSelectionPage = (function () {
     function CompanyPlanSelectionPage() {
+        this.prevPage = "companies-by-user-data";
         this.nextPage = "/application-creation";
         this.$j = jQuery.noConflict();
     }
@@ -3518,10 +3564,18 @@ var CompanyPlanSelectionPage = (function () {
         var mapDecoder = new MapJsonDecoder(companyData.deductiblesCosts);
         this.companyCosts = mapDecoder.decode();
         this.createCostSelectionForm();
+        this.prevButton = this.$j('#prevButton');
+        this.prevButton.on("click", function () { return _this.prevButtonClickHandler(); });
         EventBus.addEventListener("COMPANY_PLAN_SELECTED", function (data) { return _this.companyPlanSelectedHandler(data); });
     };
     CompanyPlanSelectionPage.prototype.navigateToNextPage = function () {
         NavigatorUtil.navigateTo(this.nextPage);
+    };
+    CompanyPlanSelectionPage.prototype.navigateToPrevPage = function () {
+        NavigatorUtil.navigateTo(this.prevPage);
+    };
+    CompanyPlanSelectionPage.prototype.prevButtonClickHandler = function () {
+        this.navigateToPrevPage();
     };
     CompanyPlanSelectionPage.prototype.getCompany = function () {
         var companyDecodedData = Cookie.getSelectedCompanyData();

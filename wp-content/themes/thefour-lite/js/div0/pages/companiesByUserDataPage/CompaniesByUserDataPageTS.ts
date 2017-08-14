@@ -19,6 +19,10 @@ class CompaniesByUserDataPageTS extends BasePage{
     private selectedCompany:any;
     private period:string;
 
+    private prevButton:any;
+    private prevPage:string = "benefits-by-user-data-and-zero-deductible";
+
+
     constructor(){
         super();
         this.period = Cookie.getPeriod();
@@ -65,7 +69,19 @@ class CompaniesByUserDataPageTS extends BasePage{
         var resultTableEmail = new ResultTableEmail();
         resultTableEmail.init();
 
+        this.prevButton = this.$j('#prevButton');
+        this.prevButton.on("click", ()=>this.prevButtonClickHandler());
+        
     }
+    
+    private prevButtonClickHandler():void{
+        this.navigateToPrevPage();
+    }
+
+    private navigateToPrevPage():void{
+        NavigatorUtil.navigateTo(this.prevPage);
+    }
+
 
     private onBuyOnlineButtonClickedHandler(data){
 

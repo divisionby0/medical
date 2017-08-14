@@ -1,10 +1,10 @@
-///<reference path="../../Cookie.ts"/>
 ///<reference path="../views/SelectionForm.ts"/>
 ///<reference path="CompanyPlanSelectionForm.ts"/>
 ///<reference path="../../../../../../plugins/medical_ensurance/js/collections/json/MapJsonDecoder.ts"/>
 ///<reference path="../../utils/NavigatorUtil.ts"/>
 var CompanyPlanSelectionPage = (function () {
     function CompanyPlanSelectionPage() {
+        this.prevPage = "companies-by-user-data";
         this.nextPage = "/application-creation";
         this.$j = jQuery.noConflict();
     }
@@ -14,10 +14,18 @@ var CompanyPlanSelectionPage = (function () {
         var mapDecoder = new MapJsonDecoder(companyData.deductiblesCosts);
         this.companyCosts = mapDecoder.decode();
         this.createCostSelectionForm();
+        this.prevButton = this.$j('#prevButton');
+        this.prevButton.on("click", function () { return _this.prevButtonClickHandler(); });
         EventBus.addEventListener("COMPANY_PLAN_SELECTED", function (data) { return _this.companyPlanSelectedHandler(data); });
     };
     CompanyPlanSelectionPage.prototype.navigateToNextPage = function () {
         NavigatorUtil.navigateTo(this.nextPage);
+    };
+    CompanyPlanSelectionPage.prototype.navigateToPrevPage = function () {
+        NavigatorUtil.navigateTo(this.prevPage);
+    };
+    CompanyPlanSelectionPage.prototype.prevButtonClickHandler = function () {
+        this.navigateToPrevPage();
     };
     CompanyPlanSelectionPage.prototype.getCompany = function () {
         var companyDecodedData = Cookie.getSelectedCompanyData();

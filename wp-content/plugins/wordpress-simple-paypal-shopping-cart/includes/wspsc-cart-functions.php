@@ -24,6 +24,10 @@ function printIsEmpty($output){
     return $output;
 }
 
+function updateCallbackUrlWithApplicationId($url){
+
+}
+
 function print_wp_shopping_cart($args = array()) {
     $output = "";
     $isEmpty = !cart_not_empty();
@@ -58,9 +62,10 @@ function print_wp_shopping_cart($args = array()) {
         $return = WP_CART_SITE_URL . '/';
     }
 
+    $applicationTempId = Cookie::getQuoteId();
     $return_url = add_query_arg('reset_wp_cart', '1', $return);
-    $return_url .= "&appId=444";
-    //$urls .= '<input id="callbackUrl" type="hidden" name="return" value="' . $return_url . '" />';
+    $applicationTempId = Cookie::getQuoteId();
+    $return_url.="&appId=".$applicationTempId;
 
     // Ilya div0 hook
     //$return_url = "http://thankuoy_111/";

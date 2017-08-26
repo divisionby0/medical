@@ -8,10 +8,14 @@ var StringUtils = (function(){
     
     return{
         formatDivisionalMoney:function(source){
+            var valueNumber = source;
             var data = source.toString().split(".");
             var division = data[1];
+            var divisionNumber = valueNumber.toFixed(3);
+
             var int = data[0];
-            var result = "$ "+ int+"."+ division.substring(0,2);
+            //var result = "$ "+ int+"."+ division.substring(0,2)+"  toFixed:"+divisionNumber;
+            var result = "$ "+ divisionNumber;
 
             return result;
         },

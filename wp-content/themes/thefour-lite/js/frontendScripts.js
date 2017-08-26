@@ -3074,7 +3074,7 @@ var MedIssuesSelectionPage = (function (_super) {
         }
     };
     MedIssuesSelectionPage.prototype.onPersonsDataValid = function () {
-        console.log("persons data is valid. Data is: ", this.personsData);
+        //console.log("persons data is valid. Data is: ", this.personsData);
         //this.$j("#quoteDate").text(this.$j("#quoteData").val());
         this.createPayNowButtonListener();
         this.createCartCheckoutButtonListener();
@@ -4035,11 +4035,11 @@ var ApplicationFinishPage = (function (_super) {
         var planData = StringUtils.parseURI(encodedPlanData);
         var encodedFormData = Cookie.getUserInputFormData();
         var formData = StringUtils.parseURI(encodedFormData);
-        console.log("formData:", formData);
         var startDate = formData.startDate.date;
         var finishDate = formData.finishDate.date;
         startDate = startDate.split("+")[0];
         finishDate = finishDate.split("+")[0];
+
         var quoteData = JSON.stringify({ company: this.companyData.companyName, benefit: this.companyData.benefit, period: period, deductible: planData.deductible, cost: planData.cost, startDate: startDate, finishDate: finishDate });
         var numPersons = this.persons.size();
         var countryOfOrigin = Cookie.getCountryOfOrigin();
@@ -4086,7 +4086,7 @@ var ApplicationFinishPage = (function (_super) {
         quoteSaver.save(this.quoteDataToSave);
     };
     ApplicationFinishPage.prototype.onPersonsDataValid = function () {
-        console.log("persons data is valid. Data is: ", this.personsData);
+        //console.log("persons data is valid. Data is: ", this.personsData);
         //this.decorateQuoteIdWithCurrentDate();
         this.saveApplication();
         this.$j("#quoteDate").text(this.$j("#quoteData").val());
@@ -4114,7 +4114,6 @@ var ApplicationFinishPage = (function (_super) {
         this.onPersonDataLoadComplete(data);
     };
     ApplicationFinishPage.prototype.onPersonDataLoadComplete = function (data) {
-        console.log("persons data: ", data);
         var dataIsValid = this.validatePersonsLoadedData(data);
         if (dataIsValid) {
             this.personsData = data;

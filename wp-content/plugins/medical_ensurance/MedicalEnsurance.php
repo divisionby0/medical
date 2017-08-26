@@ -113,13 +113,6 @@ function display_application_meta_box( $post ) {
 	$type = $post->applicationType;
 	$state = $post->applicationState;
 
-	echo '<p>created at:<b>'.$postDate.'</b></p>';
-
-	echo '<div>';
-	new ApplicationTypeView($type);
-	new ApplicationStateDropDown($state);
-	echo '</div>';
-	
 	$content = $post->post_content;
 	$quoteId = get_post_meta($postId, "id");
 	$personsData = get_post_meta($postId, "persons");
@@ -144,6 +137,18 @@ function display_application_meta_box( $post ) {
 	$sponsorLastName = get_post_meta($postId, "sponsorLastName");
 	$sponsorLastName = htmlspecialchars(urldecode($sponsorLastName[0]));
 
+	//echo '<p>created at:<b>'.$postDate.'</b></p>';
+
+	$applicationCreationDateTime = $quoteId[0];
+	$applicationCreationDateTimeData = explode("__", $applicationCreationDateTime);
+
+	echo '<p>created <b>'.$applicationCreationDateTimeData[0].'  at '.$applicationCreationDateTimeData[1].'</b></p>';
+
+	echo '<div>';
+	new ApplicationTypeView($type);
+	new ApplicationStateDropDown($state);
+	echo '</div>';
+	
 	if(!isset($sponsorFirstName) || $sponsorFirstName === ""){
 		$sponsorFirstName = "Not set";
 	}
@@ -185,7 +190,6 @@ function display_application_meta_box( $post ) {
 	//$persons = stripslashes($personsData[0]);
 	$persons = $personsData[0];
 	$quoteId = $quoteId[0];
-
 
 	echo '<div id="quoteData" style="display: none;">'.$content.'</div>';
 	echo '<div id="personsData" style="display: none;">'.$persons.'</div>';

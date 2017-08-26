@@ -478,13 +478,25 @@ var StringUtils = (function(){
             return p<0 || i<p ? ($0+' ') : $0;
         });
     }
-    
+
+    function roundPlus(x, n) { //x - число, n - количество знаков
+        if(isNaN(x) || isNaN(n)) return false;
+        var m = Math.pow(10,n);
+        return Math.round(x*m)/m;
+    }
+
+
     return{
         formatDivisionalMoney:function(source){
+            var valueNumber = source;
             var data = source.toString().split(".");
             var division = data[1];
             var int = data[0];
-            var result = "$ "+ int+"."+ division.substring(0,2);
+            var divisionNumber = valueNumber.toFixed(2);
+
+            //var result = "$ "+ int+"."+ division.substring(0,2);
+            //var result = "$ "+ int+"."+ division.substring(0,2)+"  toFixeddd:"+divisionNumber;
+            var result = "$ "+ divisionNumber;
 
             return result;
         },

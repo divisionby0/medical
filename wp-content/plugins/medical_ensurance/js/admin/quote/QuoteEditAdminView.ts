@@ -32,7 +32,6 @@ class QuoteEditAdminView{
             return;
         }
 
-
         this.updateChildren();
         this.createStateDropDownListener();
 

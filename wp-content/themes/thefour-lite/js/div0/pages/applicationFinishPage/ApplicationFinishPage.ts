@@ -51,7 +51,7 @@ class ApplicationFinishPage extends BasePage{
 
         startDate = startDate.split("+")[0];
         finishDate = finishDate.split("+")[0];
-
+        
         var quoteData:string = JSON.stringify({company:this.companyData.companyName, benefit:this.companyData.benefit, period:period, deductible:planData.deductible, cost:planData.cost, startDate:startDate, finishDate:finishDate});
 
         var numPersons:number = this.persons.size();

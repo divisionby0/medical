@@ -17,18 +17,15 @@ $decodedPlanData = json_decode(json_encode($decodedPlanData), true);
 
 $planCost = $decodedPlanData['cost'];
 
-//$GlobalTotalPremium = $planCost;
-//global $GloblaPersonID;
-
 $_POST['price'] = $planCost;
 $_POST['wspsc_product'] = $companyData["companyName"].'___productId_'.Cookie::getQuoteId();
 
+// TODO Тут я напрямую изменяю поведение плагина Simple PayPal shipping cart. Вот это ОООЧЕНЬ плохо но переписывать чужой плагин глубже я не буду
 clearCart();
-
 hookCartDataCaching();
 
 get_header('noImage');
-addToCart();
+addToCart(); // TODO Тут я напрямую изменяю поведение плагина Simple PayPal shipping cart. Вот это ОООЧЕНЬ плохо но переписывать чужой плагин глубже я не буду
 
 echo '<div id="pageType" style="display: none;">medicalIssuesSelectionPage</div>';
 echo '<div id="paymentResultCallbackPageUrl" style="display: none;">'.get_site_url().'/payment-complete-page</div>';
@@ -54,7 +51,6 @@ jQuery(document).ready(function($) {
         $("#checkOutButton").click(onCheckOutButtonClicked);
         
         function onCheckOutButtonClicked(){
-            console.log("onCheckOutButtonClicked");
             executeAjaxCall();
         }
         

@@ -28,7 +28,6 @@ function display_quote_meta_box( $post ) {
     echo '<p>created at:<b>'.$postDate.'</b></p>';
     echo '<div id="quoteData" style="display: none;">'.$post->post_content.'</div>';
     new ApplicationAdminView();
-    
     echo '</div>';
 }
 

@@ -2922,7 +2922,7 @@ result table
 }
 
 .header-image{
-  background-image: url("img/header_1280_500.jpg");
+  background-image: url("img/header_1280_500_canadian_flag.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   /*background-position-y: 94px;*/
@@ -2966,7 +2966,7 @@ result table
 }
 
 .ageRow{
-  border-left: solid #40a1f3;
+  /*border-left: solid #40a1f3;*/
   margin-left: -2px;
 }
 

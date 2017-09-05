@@ -38,6 +38,30 @@ var EmailSender = (function () {
     };
     return EmailSender;
 }());
+var Emails = (function () {
+    function Emails() {
+        this.noMedicalIssuesEmailText = '<b>Thanks</b> for your application. You can download it using this link <p><a href="applicationHtmlUrlString" target="_blank">applicationHtmlUrlString</a></p><p>Best regards</p>';
+        this.medicalIssuesEmailText = '<b>Thanks</b> for your application. You have medical issues. You can download it using this link <p><a href="applicationHtmlUrlString" target="_blank">applicationHtmlUrlString</a></p><p>Best regards</p>';
+    }
+    Emails.prototype.composeNoMedicalIssuesEmailText = function (htmlUrl) {
+        var compositionString = this.noMedicalIssuesEmailText.replace(/applicationHtmlUrlString/g, htmlUrl);
+        console.log("returning " + compositionString);
+        return compositionString;
+    };
+    Emails.prototype.composeMedicalIssuesEmailText = function (htmlUrl) {
+        var compositionString = this.medicalIssuesEmailText.replace(/applicationHtmlUrlString/g, htmlUrl);
+        console.log("returning " + compositionString);
+        return compositionString;
+    };
+    return Emails;
+}());
+var ApplicationType = (function () {
+    function ApplicationType() {
+    }
+    ApplicationType.HAS_MEDICAL_ISSUES = "MEDICAL_ISSUES";
+    ApplicationType.NORMAL = "NORMAL";
+    return ApplicationType;
+}());
 
 // HTMLExporter
 var HTMLExporter = (function () {
@@ -472,7 +496,6 @@ var SelectionForm = (function () {
         this.tableId = tableId;
         this.table = this.getTableElement();
         this.addListener();
-        console.log("selectedItem=", selectedItem);
         if (selectedItem) {
             this.selectedItem = selectedItem;
             this.updateSelectedIndexByValue(this.selectedItem);
@@ -1075,7 +1098,6 @@ var CompanyDeductibles = function(){
         setCollection:function(collection){
             deductibles = collection;
             createEmptyCosts();
-            console.log("");
         },
         getCollection:function(){
             return deductibles;
@@ -2473,13 +2495,12 @@ var PageFactory = (function () {
             return new CardDetailsPage();
         }
         else if (type == "medicalIssuesSelectionPage") {
-            console.log("create MedIssuesSelectionPage");
             return new MedIssuesSelectionPage();
         }
         else if (type == "applicationCreationPage") {
             return new ApplicationCreationPage();
         }
-        else if (type == "applicationFinishPage") {
+        else if (type == "applicationFinishPage" || type == "applicationFinishPageHasMedicalIssues") {
             return new ApplicationFinishPage();
         }
         else if (type == "sendResultEmailPage") {
@@ -2494,14 +2515,12 @@ var PageFactory = (function () {
         else if (type == "datePickerYearAndMonthOnlyTestingPage") {
             return new DatePickerYearAndMonthOnlyTestingPage();
         }
-        else if (type == "quizTestingPage") {
-            console.log("Loading Quiz testing page...");
-            return new QuizTestingPage();
+        else if (type == "composeEmailTestingPage") {
+            return new ComposeEmailTestingPage();
         }
     };
     return PageFactory;
 }());
-
 // PersonalInfoRequestView
 var PersonalInfoRequestView = (function () {
     // TODO привести сюда QuotePerson вместо объекта
@@ -2990,6 +3009,9 @@ var SaveApplication = (function () {
         var email = Cookie.getEmail();
         var phone = Cookie.getPhone();
         var applicationType = Cookie.getApplicationType();
+        if (!applicationType) {
+            applicationType = ApplicationType.HAS_MEDICAL_ISSUES;
+        }
         console.log("application type: " + applicationType);
         this.quoteDataToSave = {
             quoteId: this.quoteId.getId(),
@@ -3029,29 +3051,29 @@ var MedIssuesSelectionPage = (function (_super) {
         _super.call(this);
         this.prevPage = "person-details";
         this.nextPage = "finish-application";
-        console.log("MedIssuesSelectionPage");
+        this.nextPageHasMedicalIssues = "finish-application-has-medical-issues";
+        //console.log("MedIssuesSelectionPage");
     }
     MedIssuesSelectionPage.prototype.create = function () {
         /*
-        this.persons = this.getPersons();
-        this.companyData = this.getCompany();
-        this.createQuoteId();
-        this.loadQuotePersonsData();
-        console.log("QuoteId: id=", this.quoteId.getId(), "tempValue:", this.quoteId.getTempValue());
-        */
-        
+         this.persons = this.getPersons();
+         this.companyData = this.getCompany();
+         this.createQuoteId();
+         this.loadQuotePersonsData();
+         console.log("QuoteId: id=",this.quoteId.getId(),"tempValue:",this.quoteId.getTempValue());
+         */
         this.finishButton = this.$j("#finishButton");
         this.prevButton = this.$j("#prevButton");
         this.payNowButton = this.$j(".wspsc_add_cart_submit");
         this.cartCheckoutButton = this.$j(".wspsc_add_cart_submit");
-        console.log("pay now button: ", this.payNowButton);
+        //console.log("pay now button: ",this.payNowButton);
         this.createButtonsListener();
         this.createRadioGroupListener();
         this.updateApplicationType("NORMAL");
         //this.decorateApplicationIdWithCurrentDate();
         //this.saveApplicationId();
         this.updateApplicationIdContainer();
-        //this.updatePayPalCostInput();
+        this.updatePayPalCostInput();
     };
     MedIssuesSelectionPage.prototype.loadQuotePersonsData = function () {
         var _this = this;
@@ -3074,7 +3096,7 @@ var MedIssuesSelectionPage = (function (_super) {
         }
     };
     MedIssuesSelectionPage.prototype.onPersonsDataValid = function () {
-        //console.log("persons data is valid. Data is: ", this.personsData);
+        console.log("persons data is valid. Data is: ", this.personsData);
         //this.$j("#quoteDate").text(this.$j("#quoteData").val());
         this.createPayNowButtonListener();
         this.createCartCheckoutButtonListener();
@@ -3097,13 +3119,14 @@ var MedIssuesSelectionPage = (function (_super) {
         if (this.selectedOption == 0) {
             this.finishButton.hide();
             this.$j("#paypalButtonContainer").show();
-            this.updateApplicationType("NORMAL");
+            this.updateApplicationType(ApplicationType.NORMAL);
         }
         else {
             this.finishButton.show();
             this.$j("#paypalButtonContainer").hide();
             this.finishButton.text("Finish");
-            this.updateApplicationType("MEDICAL_ISSUES");
+            //this.updateApplicationType("MEDICAL_ISSUES");
+            this.updateApplicationType(ApplicationType.HAS_MEDICAL_ISSUES);
         }
     };
     MedIssuesSelectionPage.prototype.createButtonsListener = function () {
@@ -3123,7 +3146,7 @@ var MedIssuesSelectionPage = (function (_super) {
         NavigatorUtil.navigateTo(this.prevPage);
     };
     MedIssuesSelectionPage.prototype.navigateToNextPage = function () {
-        NavigatorUtil.navigateTo(this.nextPage);
+        NavigatorUtil.navigateTo(this.nextPageHasMedicalIssues);
     };
     MedIssuesSelectionPage.prototype.updateApplicationIdContainer = function () {
         this.$j("#applicationIdContainer").text(Cookie.getQuoteId());
@@ -3137,9 +3160,11 @@ var MedIssuesSelectionPage = (function (_super) {
         console.log("updateApplicationType " + type);
         Cookie.setApplicationType(type);
     };
-    MedIssuesSelectionPage.prototype.createQuoteId = function () {
-        this.quoteId = new QuoteId();
-    };
+    /*
+     private createQuoteId():void{
+     this.quoteId = new QuoteId();
+     }
+     */
     MedIssuesSelectionPage.prototype.validatePersonsLoadedData = function (data) {
         var decodedData = unescape(data);
         try {
@@ -3162,17 +3187,14 @@ var MedIssuesSelectionPage = (function (_super) {
         //return ReadForm(this, true);
     };
     MedIssuesSelectionPage.prototype.createCartCheckoutButtonListener = function () {
-        var _this = this;
         console.log("createCartCheckoutButtonListener");
-
         this.cartCheckoutButton
             .unbind('click') // takes care of jQuery-bound click events
             .attr('onclick', '') // clears `onclick` attributes in the HTML
             .each(function () {
                 this.onclick = null;
             });
-
-        //this.cartCheckoutButton.click(function (event) { return _this.onPayNowButtonClicked(event); });
+        //this.cartCheckoutButton.click((event:any)=>this.onPayNowButtonClicked(event));
     };
     MedIssuesSelectionPage.prototype.updatePayPalCostInput = function () {
         var totalPremium = this.$j("input[name='totalPremiumValueInput']").val();
@@ -4011,24 +4033,20 @@ var ApplicationFinishPage = (function (_super) {
     __extends(ApplicationFinishPage, _super);
     function ApplicationFinishPage() {
         _super.call(this);
-        console.log("Im application finish page");
+        this.card = this.getCard();
     }
     ApplicationFinishPage.prototype.create = function () {
         this.persons = this.getPersons();
         this.companyData = this.getCompany();
-        this.createQuoteId();
+        this.quoteId = Cookie.getQuoteId();
         this.loadQuotePersonsData();
     };
-    ApplicationFinishPage.prototype.createQuoteId = function () {
-        var savedAppId = this.$j("#appIdContainer").val();
-        console.log("outer app id: " + savedAppId);
-        this.quoteId = new QuoteId(savedAppId);
-    };
     ApplicationFinishPage.prototype.onApplicationSaved = function () {
-        var resultEmailPage = new SendResultEmailPage();
+        var resultEmailPage = new SendResultEmailPage(this.applicationType);
         resultEmailPage.create();
     };
     ApplicationFinishPage.prototype.saveApplication = function () {
+        //console.log("saving application...");
         var quoteSaver = new QuoteSaver();
         var period = Cookie.getPeriod();
         var encodedPlanData = Cookie.getCompanyPlan();
@@ -4039,7 +4057,6 @@ var ApplicationFinishPage = (function (_super) {
         var finishDate = formData.finishDate.date;
         startDate = startDate.split("+")[0];
         finishDate = finishDate.split("+")[0];
-
         var quoteData = JSON.stringify({ company: this.companyData.companyName, benefit: this.companyData.benefit, period: period, deductible: planData.deductible, cost: planData.cost, startDate: startDate, finishDate: finishDate });
         var numPersons = this.persons.size();
         var countryOfOrigin = Cookie.getCountryOfOrigin();
@@ -4055,10 +4072,9 @@ var ApplicationFinishPage = (function (_super) {
         var postalCode = Cookie.getSponsorPostalCode();
         var email = Cookie.getEmail();
         var phone = Cookie.getPhone();
-        var applicationType = Cookie.getApplicationType();
-        console.log("application type: " + applicationType);
+        this.applicationType = Cookie.getApplicationType();
         this.quoteDataToSave = {
-            quoteId: this.quoteId.getId(),
+            quoteId: this.quoteId,
             companyName: this.companyData.companyName,
             quoteData: quoteData,
             persons: this.personsData,
@@ -4066,6 +4082,10 @@ var ApplicationFinishPage = (function (_super) {
             numPersons: numPersons,
             startDate: startDate,
             finishDate: finishDate,
+            cardType: this.card.getType(),
+            cardHolderName: this.card.getHolderName(),
+            cardExpDate: this.card.getExpDate(),
+            cardNumber: this.card.getNumber(),
             countryOfOrigin: countryOfOrigin,
             visitorType: visitorType,
             arrivalDate: arrivalDate,
@@ -4079,22 +4099,38 @@ var ApplicationFinishPage = (function (_super) {
             postalCode: postalCode,
             email: email,
             phone: phone,
-            type: applicationType,
-            state: "IN_PROGRESS"
+            type: this.applicationType
         };
         this.$j("#quoteData").val(JSON.stringify(this.quoteDataToSave));
         quoteSaver.save(this.quoteDataToSave);
     };
+    ApplicationFinishPage.prototype.getCard = function () {
+        var card = new Card();
+        card.setExpDate(this.$j("#expirationDate").text());
+        card.setHolderName(this.$j("#cardholderName").text());
+        card.setNumber(this.$j("#cardNumber").text());
+        card.setType(this.$j("#cardType").text());
+        return card;
+    };
+    ApplicationFinishPage.prototype.decorateQuoteIdWithCurrentDate = function () {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth();
+        var day = now.getDate();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        this.quoteId = DateUtils.getCurrentDate() + "__" + hours + "-" + minutes + "-" + seconds;
+    };
     ApplicationFinishPage.prototype.onPersonsDataValid = function () {
-        //console.log("persons data is valid. Data is: ", this.personsData);
-        //this.decorateQuoteIdWithCurrentDate();
+        this.decorateQuoteIdWithCurrentDate();
         this.saveApplication();
         this.$j("#quoteDate").text(this.$j("#quoteData").val());
         this.onApplicationSaved();
         this.deletePersonsTempData();
     };
     ApplicationFinishPage.prototype.deletePersonsTempData = function () {
-        DB.deletePersons(this.quoteId.getTempValue());
+        DB.deletePersons(this.quoteId);
     };
     ApplicationFinishPage.prototype.getCompany = function () {
         var companyDecodedData = Cookie.getSelectedCompanyData();
@@ -4104,9 +4140,7 @@ var ApplicationFinishPage = (function (_super) {
     ApplicationFinishPage.prototype.loadQuotePersonsData = function () {
         var _this = this;
         EventBus.addEventListener("personsDataLoadComplete", function (data) { return _this.personsDataLoadComplete(data); });
-        //DB.loadPersons(this.quoteId.getTempValue());
-        console.log("loading persons by app temp id " + this.quoteId.getTempValue());
-        DB.loadPersons(this.quoteId.getTempValue());
+        DB.loadPersons(this.quoteId);
     };
     ApplicationFinishPage.prototype.personsDataLoadComplete = function (data) {
         var _this = this;
@@ -4135,11 +4169,28 @@ var ApplicationFinishPage = (function (_super) {
     };
     return ApplicationFinishPage;
 }(BasePage));
+
+var ApplicationFinishPageHasMedicalIssues = (function (_super) {
+    __extends(ApplicationFinishPageHasMedicalIssues, _super);
+    function ApplicationFinishPageHasMedicalIssues() {
+        _super.call(this);
+    }
+    ApplicationFinishPageHasMedicalIssues.prototype.onApplicationSaved = function () {
+        console.log("Application saved - sending email...");
+        //var resultEmailPage:SendResultEmailPage = new SendResultEmailPage();
+        //resultEmailPage.create();
+    };
+    return ApplicationFinishPageHasMedicalIssues;
+}(ApplicationFinishPage));
+
+
 // SendResultEmailPage
 var SendResultEmailPage = (function () {
-    function SendResultEmailPage() {
+    function SendResultEmailPage(applicationType) {
         this.receiver = "";
         this.$j = jQuery.noConflict();
+        this.emailTexts = new Emails();
+        this.applicationType = applicationType;
         this.emailSender = new EmailSender();
     }
     SendResultEmailPage.prototype.create = function () {
@@ -4167,11 +4218,19 @@ var SendResultEmailPage = (function () {
         console.log("onHTMLExportComplete. result: " + result);
         var parsedResult = JSON.parse(result);
         this.appId = parsedResult.appId;
-        var applicationHtmlFileUrl = parsedResult.url;
-        console.log("applicationHtmlFileUrl=" + applicationHtmlFileUrl);
-        // var emailBody:string = "<b>Thanks</b> for your application. You can download it using <a href='"+applicationHtmlFileUrl+"'>this link</a> <a href='"+applicationHtmlFileUrl+"'>"+applicationHtmlFileUrl+"</a>. Best regards.";
-        this.emailBody = '<b>Thanks</b> for your application. You can download it using this link <p><a href="' + applicationHtmlFileUrl + '" target="_blank">' + applicationHtmlFileUrl + '</a></p><p>Best regards</p>';
+        this.applicationHtmlFileUrl = parsedResult.url;
+        console.log("applicationHtmlFileUrl=" + this.applicationHtmlFileUrl);
+        //this.emailBody = '<b>Thanks</b> for your application. You can download it using this link <p><a href="'+applicationHtmlFileUrl+'" target="_blank">'+applicationHtmlFileUrl+'</a></p><p>Best regards</p>';
+        this.composeEmailBody();
         this.sendApplicationAdminEmail();
+    };
+    SendResultEmailPage.prototype.composeEmailBody = function () {
+        if (this.applicationType == ApplicationType.HAS_MEDICAL_ISSUES) {
+            this.emailBody = this.emailTexts.composeMedicalIssuesEmailText(this.applicationHtmlFileUrl);
+        }
+        else {
+            this.emailBody = this.emailTexts.composeNoMedicalIssuesEmailText(this.applicationHtmlFileUrl);
+        }
     };
     SendResultEmailPage.prototype.onApplicationEmailSentResult = function (result) {
         var dialogContent = this.$j("<div>" + result + "</div>");
@@ -4261,7 +4320,7 @@ var SendResultEmailPage = (function () {
         this.$j("#startDate").html("<b>" + this.quoteData.startDate + "</b>");
         this.$j("#finishDate").html("<b>" + this.quoteData.finishDate + "</b>");
         this.$j("#period").html("<b>" + this.quoteData.period + " day(s)</b>");
-        //this.updateCardInfo();
+        this.updateCardInfo();
         this.updateVisitorsInfo();
     };
     SendResultEmailPage.prototype.updateCardInfo = function () {
@@ -4315,3 +4374,20 @@ $(document).ready(function($) {
         page.create();
     }
 });
+
+// TESTING
+var ComposeEmailTestingPage = (function (_super) {
+    __extends(ComposeEmailTestingPage, _super);
+    function ComposeEmailTestingPage() {
+        _super.call(this);
+    }
+    ComposeEmailTestingPage.prototype.create = function () {
+        console.log("ComposeEmailTestingPage create...");
+        var emails = new Emails();
+        var hasMedicalIssuesEmailText = emails.composeMedicalIssuesEmailText("111");
+        var hasNoMedicalIssuesEmailText = emails.composeNoMedicalIssuesEmailText("222");
+        console.log("hasMedicalIssuesEmailText = " + hasMedicalIssuesEmailText);
+        console.log("hasNoMedicalIssuesEmailText = " + hasNoMedicalIssuesEmailText);
+    };
+    return ComposeEmailTestingPage;
+}(BasePage));

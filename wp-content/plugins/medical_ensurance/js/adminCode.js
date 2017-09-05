@@ -620,7 +620,7 @@ var QuoteSaver = (function () {
             'quoteId': quoteData.quoteId,
             'applicationType': quoteData.type
         };
-        //console.log("saving ",dataToSave);
+        console.log("saving quote ",dataToSave);
         this.$j.post(ajaxurl, dataToSave, function (response) { return _this.onQuoteSaveComplete(response); });
     };
     QuoteSaver.prototype.onQuoteSaveComplete = function (response) {

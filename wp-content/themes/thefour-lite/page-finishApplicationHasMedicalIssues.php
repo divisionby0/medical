@@ -1,9 +1,9 @@
 <?php
 /*
-Template Name: page finish application
+Template Name: page finish application has medical issues
 */
 get_header('noImage');
-echo '<div id="pageType" style="display: none;">applicationFinishPage</div>';
+echo '<div id="pageType" style="display: none;">applicationFinishPageHasMedicalIssues</div>';
 echo '<div id="cardholderName" style="display: none;">'.$_POST["cardholderNameInput"].'</div>';
 echo '<div id="cardNumber" style="display: none;">'.$_POST["cardNumberInput"].'</div>';
 echo '<div id="expirationDate" style="display: none;">'.$_POST["expirationDateInput"].'</div>';
@@ -16,7 +16,6 @@ echo '<div>';
 //var_dump($_GET);
 echo '</div>';
 
-$appId = $_GET["appId"];
 $medicalIssuesOption = $_GET["medIssues"];
 
 echo '<input id="appIdContainer" value="'.Cookie::getQuoteId().'" type="hidden"></input>';

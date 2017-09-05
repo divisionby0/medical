@@ -10,13 +10,15 @@ var __extends = (this && this.__extends) || function (d, b) {
 ///<reference path="../../../../../../plugins/medical_ensurance/js/events/EventBus.ts"/>
 ///<reference path="../../../../../../plugins/medical_ensurance/js/db/DB.ts"/>
 ///<reference path="SaveApplication.ts"/>
+///<reference path="../applicationFinishPage/ApplicationType.ts"/>
 var MedIssuesSelectionPage = (function (_super) {
     __extends(MedIssuesSelectionPage, _super);
     function MedIssuesSelectionPage() {
         _super.call(this);
         this.prevPage = "person-details";
         this.nextPage = "finish-application";
-        console.log("MedIssuesSelectionPage");
+        this.nextPageHasMedicalIssues = "finish-application-has-medical-issues";
+        //console.log("MedIssuesSelectionPage");
     }
     MedIssuesSelectionPage.prototype.create = function () {
         /*
@@ -30,7 +32,7 @@ var MedIssuesSelectionPage = (function (_super) {
         this.prevButton = this.$j("#prevButton");
         this.payNowButton = this.$j(".wspsc_add_cart_submit");
         this.cartCheckoutButton = this.$j(".wspsc_add_cart_submit");
-        console.log("pay now button: ", this.payNowButton);
+        //console.log("pay now button: ",this.payNowButton);
         this.createButtonsListener();
         this.createRadioGroupListener();
         this.updateApplicationType("NORMAL");
@@ -83,13 +85,14 @@ var MedIssuesSelectionPage = (function (_super) {
         if (this.selectedOption == 0) {
             this.finishButton.hide();
             this.$j("#paypalButtonContainer").show();
-            this.updateApplicationType("NORMAL");
+            this.updateApplicationType(ApplicationType.NORMAL);
         }
         else {
             this.finishButton.show();
             this.$j("#paypalButtonContainer").hide();
             this.finishButton.text("Finish");
-            this.updateApplicationType("MEDICAL_ISSUES");
+            //this.updateApplicationType("MEDICAL_ISSUES");
+            this.updateApplicationType(ApplicationType.HAS_MEDICAL_ISSUES);
         }
     };
     MedIssuesSelectionPage.prototype.createButtonsListener = function () {
@@ -109,7 +112,7 @@ var MedIssuesSelectionPage = (function (_super) {
         NavigatorUtil.navigateTo(this.prevPage);
     };
     MedIssuesSelectionPage.prototype.navigateToNextPage = function () {
-        NavigatorUtil.navigateTo(this.nextPage);
+        NavigatorUtil.navigateTo(this.nextPageHasMedicalIssues);
     };
     MedIssuesSelectionPage.prototype.updateApplicationIdContainer = function () {
         this.$j("#applicationIdContainer").text(Cookie.getQuoteId());

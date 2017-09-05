@@ -5,6 +5,9 @@
 ///<reference path="cardDetailsPage/CardDetailsPage.ts"/>
 ///<reference path="applicationFinishPage/ApplicationFinishPage.ts"/>
 ///<reference path="sendResultEmailPage/SendResultEmailPage.ts"/>
+///<reference path="medIssuesSelectionPage/MedIssuesSelectionPage.ts"/>
+///<reference path="applicationFinishPage/ApplicationFinishPageHasMedicalIssues.ts"/>
+///<reference path="composeEmailTestingPage/ComposeEmailTestingPage.ts"/>
 declare var CompaniesByUserDataPage;
 declare var BenefitSelectionPage;
 declare var UserInputFormPage;
@@ -24,10 +27,13 @@ class PageFactory {
         else if(type == "cardDetailsPage"){
             return new CardDetailsPage();
         }
+        else if (type == "medicalIssuesSelectionPage") {
+            return new MedIssuesSelectionPage();
+        }
         else if(type == "applicationCreationPage"){
             return new ApplicationCreationPage();
         }
-        else if(type == "applicationFinishPage"){
+        else if(type == "applicationFinishPage" || type == "applicationFinishPageHasMedicalIssues"){
             return new ApplicationFinishPage();
         }
         else if(type == "sendResultEmailPage"){
@@ -41,6 +47,9 @@ class PageFactory {
         }
         else if(type == "datePickerYearAndMonthOnlyTestingPage"){
             return new DatePickerYearAndMonthOnlyTestingPage();
+        }
+        else if(type == "composeEmailTestingPage"){
+            return new ComposeEmailTestingPage();
         }
     }
 }

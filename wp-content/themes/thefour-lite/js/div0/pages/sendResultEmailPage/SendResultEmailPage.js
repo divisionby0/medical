@@ -5,10 +5,15 @@
 ///<reference path="../../../../../../plugins/medical_ensurance/js/admin/quote/persons/QuotePersonPDFView.ts"/>
 ///<reference path="../../../../../../plugins/medical_ensurance/js/questionairy/app/UserAnswersPDFView.ts"/>
 ///<reference path="../../htmlExport/HTMLExporter.ts"/>
+///<reference path="../applicationFinishPage/ApplicationType.ts"/>
+///<reference path="../../utils/Emails.ts"/>
 var SendResultEmailPage = (function () {
-    function SendResultEmailPage() {
+    function SendResultEmailPage(applicationType) {
         this.receiver = "";
         this.$j = jQuery.noConflict();
+        this.emailTexts = new Emails();
+        this.applicationType = applicationType;
+        console.log("SendResult email page appType: " + this.applicationType);
         this.emailSender = new EmailSender();
     }
     SendResultEmailPage.prototype.create = function () {
@@ -36,14 +41,21 @@ var SendResultEmailPage = (function () {
         console.log("onHTMLExportComplete. result: " + result);
         var parsedResult = JSON.parse(result);
         this.appId = parsedResult.appId;
-        var applicationHtmlFileUrl = parsedResult.url;
-        console.log("applicationHtmlFileUrl=" + applicationHtmlFileUrl);
-        // var emailBody:string = "<b>Thanks</b> for your application. You can download it using <a href='"+applicationHtmlFileUrl+"'>this link</a> <a href='"+applicationHtmlFileUrl+"'>"+applicationHtmlFileUrl+"</a>. Best regards.";
-        this.emailBody = '<b>Thanks</b> for your application. You can download it using this link <p><a href="' + applicationHtmlFileUrl + '" target="_blank">' + applicationHtmlFileUrl + '</a></p><p>Best regards</p>';
-        console.log("emailBody=" + this.emailBody);
-        console.log("___appId=" + this.appId);
+        this.applicationHtmlFileUrl = parsedResult.url;
+        console.log("applicationHtmlFileUrl=" + this.applicationHtmlFileUrl);
+        //this.emailBody = '<b>Thanks</b> for your application. You can download it using this link <p><a href="'+applicationHtmlFileUrl+'" target="_blank">'+applicationHtmlFileUrl+'</a></p><p>Best regards</p>';
+        this.composeEmailBody();
+        console.log("Email body: " + this.emailBody);
         this.sendApplicationAdminEmail();
-        //this.emailSender.sendApplicationResult(this.receiver, this.emailBody, this.appId);
+    };
+    SendResultEmailPage.prototype.composeEmailBody = function () {
+        console.log("composeEmailBody this.applicationType=" + this.applicationType);
+        if (this.applicationType == ApplicationType.HAS_MEDICAL_ISSUES) {
+            this.emailBody = this.emailTexts.composeMedicalIssuesEmailText(this.applicationHtmlFileUrl);
+        }
+        else {
+            this.emailBody = this.emailTexts.composeNoMedicalIssuesEmailText(this.applicationHtmlFileUrl);
+        }
     };
     SendResultEmailPage.prototype.onApplicationEmailSentResult = function (result) {
         var dialogContent = this.$j("<div>" + result + "</div>");

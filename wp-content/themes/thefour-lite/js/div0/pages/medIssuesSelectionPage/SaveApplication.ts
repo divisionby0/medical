@@ -2,6 +2,7 @@
 ///<reference path="../../../../../../plugins/medical_ensurance/js/utils/Cookie.ts"/>
 ///<reference path="../QuoteId.ts"/>
 ///<reference path="../../../../../../plugins/medical_ensurance/js/admin/quote/persons/QuotePersonCollection.ts"/>
+///<reference path="../applicationFinishPage/ApplicationType.ts"/>
 declare var StringUtils:any;
 class SaveApplication {
 
@@ -62,6 +63,10 @@ class SaveApplication {
 
         var applicationType:string = Cookie.getApplicationType();
 
+        if(!applicationType){
+            applicationType = ApplicationType.HAS_MEDICAL_ISSUES;
+        }
+        
         console.log("application type: "+applicationType);
 
         this.quoteDataToSave = {

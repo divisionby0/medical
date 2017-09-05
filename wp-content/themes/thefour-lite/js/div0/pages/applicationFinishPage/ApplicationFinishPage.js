@@ -23,10 +23,11 @@ var ApplicationFinishPage = (function (_super) {
         this.loadQuotePersonsData();
     };
     ApplicationFinishPage.prototype.onApplicationSaved = function () {
-        var resultEmailPage = new SendResultEmailPage();
+        var resultEmailPage = new SendResultEmailPage(this.applicationType);
         resultEmailPage.create();
     };
     ApplicationFinishPage.prototype.saveApplication = function () {
+        //console.log("saving application...");
         var quoteSaver = new QuoteSaver();
         var period = Cookie.getPeriod();
         var encodedPlanData = Cookie.getCompanyPlan();
@@ -52,6 +53,7 @@ var ApplicationFinishPage = (function (_super) {
         var postalCode = Cookie.getSponsorPostalCode();
         var email = Cookie.getEmail();
         var phone = Cookie.getPhone();
+        this.applicationType = Cookie.getApplicationType();
         this.quoteDataToSave = {
             quoteId: this.quoteId,
             companyName: this.companyData.companyName,
@@ -77,7 +79,8 @@ var ApplicationFinishPage = (function (_super) {
             province: province,
             postalCode: postalCode,
             email: email,
-            phone: phone
+            phone: phone,
+            type: this.applicationType
         };
         this.$j("#quoteData").val(JSON.stringify(this.quoteDataToSave));
         quoteSaver.save(this.quoteDataToSave);

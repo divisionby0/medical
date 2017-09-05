@@ -5,6 +5,7 @@
 ///<reference path="../../../../../../plugins/medical_ensurance/js/events/EventBus.ts"/>
 ///<reference path="../../../../../../plugins/medical_ensurance/js/db/DB.ts"/>
 ///<reference path="SaveApplication.ts"/>
+///<reference path="../applicationFinishPage/ApplicationType.ts"/>
 declare var DateUtils:any;
 declare function escape(s:string): string;
 declare function unescape(s:string): string;
@@ -15,6 +16,8 @@ class MedIssuesSelectionPage extends BasePage{
 
     private prevPage:string = "person-details";
     private nextPage:string = "finish-application";
+    private nextPageHasMedicalIssues:string = "finish-application-has-medical-issues";
+
     private selectedOption:number;
     private applicationId:string;
     private payNowButton:any; // name and class wspsc_add_cart_submit
@@ -25,7 +28,7 @@ class MedIssuesSelectionPage extends BasePage{
 
     constructor(){
         super();
-        console.log("MedIssuesSelectionPage");
+        //console.log("MedIssuesSelectionPage");
     }
 
     public create():void{
@@ -42,7 +45,7 @@ class MedIssuesSelectionPage extends BasePage{
         this.payNowButton = this.$j(".wspsc_add_cart_submit");
         this.cartCheckoutButton = this.$j(".wspsc_add_cart_submit");
         
-        console.log("pay now button: ",this.payNowButton);
+        //console.log("pay now button: ",this.payNowButton);
         
         this.createButtonsListener();
         this.createRadioGroupListener();
@@ -103,13 +106,15 @@ class MedIssuesSelectionPage extends BasePage{
         if(this.selectedOption == 0){
             this.finishButton.hide();
             this.$j("#paypalButtonContainer").show();
-            this.updateApplicationType("NORMAL");
+            this.updateApplicationType(ApplicationType.NORMAL);
+            //this.updateApplicationType("NORMAL");
         }
         else{
             this.finishButton.show();
             this.$j("#paypalButtonContainer").hide();
             this.finishButton.text("Finish");
-            this.updateApplicationType("MEDICAL_ISSUES");
+            //this.updateApplicationType("MEDICAL_ISSUES");
+            this.updateApplicationType(ApplicationType.HAS_MEDICAL_ISSUES);
         }
     }
 
@@ -132,7 +137,7 @@ class MedIssuesSelectionPage extends BasePage{
         NavigatorUtil.navigateTo(this.prevPage);
     }
     private navigateToNextPage():void {
-        NavigatorUtil.navigateTo(this.nextPage);
+        NavigatorUtil.navigateTo(this.nextPageHasMedicalIssues);
     }
 
     private updateApplicationIdContainer():void {

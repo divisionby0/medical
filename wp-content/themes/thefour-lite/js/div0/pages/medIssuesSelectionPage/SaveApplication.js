@@ -2,6 +2,7 @@
 ///<reference path="../../../../../../plugins/medical_ensurance/js/utils/Cookie.ts"/>
 ///<reference path="../QuoteId.ts"/>
 ///<reference path="../../../../../../plugins/medical_ensurance/js/admin/quote/persons/QuotePersonCollection.ts"/>
+///<reference path="../applicationFinishPage/ApplicationType.ts"/>
 var SaveApplication = (function () {
     function SaveApplication(companyData, quoteId, personsData, persons) {
         console.log("saving application quoteId=", quoteId.getId(), " tempId:", quoteId.getTempValue());
@@ -36,6 +37,9 @@ var SaveApplication = (function () {
         var email = Cookie.getEmail();
         var phone = Cookie.getPhone();
         var applicationType = Cookie.getApplicationType();
+        if (!applicationType) {
+            applicationType = ApplicationType.HAS_MEDICAL_ISSUES;
+        }
         console.log("application type: " + applicationType);
         this.quoteDataToSave = {
             quoteId: this.quoteId.getId(),

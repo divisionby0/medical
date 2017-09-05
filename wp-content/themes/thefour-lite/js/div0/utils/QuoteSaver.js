@@ -31,9 +31,9 @@ var QuoteSaver = (function () {
             'city': quoteData.city,
             'province': quoteData.province,
             'postalCode': quoteData.postalCode,
-            'quoteId': quoteData.quoteId
+            'quoteId': quoteData.quoteId,
+            'applicationType': quoteData.type
         };
-        //console.log("saving ",dataToSave);
         this.$j.post(ajaxurl, dataToSave, function (response) { return _this.onQuoteSaveComplete(response); });
     };
     QuoteSaver.prototype.onQuoteSaveComplete = function (response) {

@@ -17,6 +17,7 @@ class ApplicationFinishPage extends BasePage{
     private personsData:string;
 
     private quoteDataToSave:any;
+    private applicationType:string;
 
     constructor(){
         super();
@@ -30,12 +31,14 @@ class ApplicationFinishPage extends BasePage{
         this.loadQuotePersonsData();
     }
     
-    private onApplicationSaved():void{
-        var resultEmailPage:SendResultEmailPage = new SendResultEmailPage();
+
+    protected onApplicationSaved():void{
+        var resultEmailPage:SendResultEmailPage = new SendResultEmailPage(this.applicationType);
         resultEmailPage.create();
     }
 
     private saveApplication():void {
+        //console.log("saving application...");
         var quoteSaver:QuoteSaver = new QuoteSaver();
 
         var period:string = Cookie.getPeriod();
@@ -75,6 +78,8 @@ class ApplicationFinishPage extends BasePage{
         var email:string = Cookie.getEmail();
         var phone:string = Cookie.getPhone();
 
+        this.applicationType = Cookie.getApplicationType();
+        
         this.quoteDataToSave = {
             quoteId:this.quoteId,
             companyName:this.companyData.companyName,
@@ -100,7 +105,8 @@ class ApplicationFinishPage extends BasePage{
             province:province,
             postalCode:postalCode,
             email:email,
-            phone:phone
+            phone:phone,
+            type:this.applicationType
         };
 
         this.$j("#quoteData").val(JSON.stringify(this.quoteDataToSave));

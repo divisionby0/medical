@@ -40,17 +40,15 @@ var EmailSender = (function () {
 }());
 var Emails = (function () {
     function Emails() {
-        this.noMedicalIssuesEmailText = '<b>Thanks</b> for your application. You can download it using this link <p><a href="applicationHtmlUrlString" target="_blank">applicationHtmlUrlString</a></p><p>Best regards</p>';
-        this.medicalIssuesEmailText = '<b>Thanks</b> for your application. You have medical issues. You can download it using this link <p><a href="applicationHtmlUrlString" target="_blank">applicationHtmlUrlString</a></p><p>Best regards</p>';
+        this.noMedicalIssuesEmailText = '<p><b>Thank you for your order!</b></p><p>Please find your application attached.</p><p><a href="applicationHtmlUrlString" target="_blank">applicationHtmlUrlString</a></p><p>Please check your application to ensure that the information you provided to us is correct. You will also receive an email soon with your Visitors to Canada Insurance Policy from the insurance company. If you need to make any changes to your application, or have any questions related to your order, email us at: <a href="mailto:CustomerSupport@InsureYourStay.ca">CustomerSupport@InsureYourStay.ca</a></p>';
+        this.medicalIssuesEmailText = '<p><b>Thank you for your application!</b></p><p>Please find your application attached.</p><p><a href="applicationHtmlUrlString" target="_blank">applicationHtmlUrlString</a></p><p>Please check your application to ensure that the information you provided to us is correct.</p><p style="color: #a60021;"><b>Important:</b></p><p style="color: #a60021;"><b>Next Step to Complete Your Application</b></p><p>You selected that you had a medical condition you wished to have covered... Please send an email to us explaining the nature of your medical condition. Include your phone number and the best time of day to contact you, and we will call you to complete your application and process your payment. If you need to make any changes to your application, or have any questions related to your order, please include them in your email. Email us at: <a href="mailto:CustomerSupport@InsureYourStay.ca">CustomerSupport@InsureYourStay.ca</a></p>';
     }
     Emails.prototype.composeNoMedicalIssuesEmailText = function (htmlUrl) {
         var compositionString = this.noMedicalIssuesEmailText.replace(/applicationHtmlUrlString/g, htmlUrl);
-        console.log("returning " + compositionString);
         return compositionString;
     };
     Emails.prototype.composeMedicalIssuesEmailText = function (htmlUrl) {
         var compositionString = this.medicalIssuesEmailText.replace(/applicationHtmlUrlString/g, htmlUrl);
-        console.log("returning " + compositionString);
         return compositionString;
     };
     return Emails;
@@ -81,7 +79,6 @@ var HTMLExporter = (function () {
         };
     };
     HTMLExporter.prototype.onComplete = function (response) {
-        //console.log("html export response: ",response);
         EventBus.dispatchEvent("HTML_EXPORT_COMPLETE", response);
     };
     return HTMLExporter;
@@ -134,7 +131,6 @@ var BenefitsJsonDataParser = function(){
                     }
                 }
             }
-
             return benefits;
         }
     }
@@ -735,7 +731,6 @@ var MedicalDeclarationRequirementUpdater = (function () {
             var useSCCC = person.getIsUseSCCC();
             var medicalDeclarationRequired = this.rateTableGuide.isMedicalDeclarationRequired(personAge, useSCCC);
             person.setMedicalDeclarationRequired(medicalDeclarationRequired);
-            console.log("Person " + personAge + "  medicalDeclarationRequired=" + medicalDeclarationRequired);
         }
     };
     return MedicalDeclarationRequirementUpdater;
@@ -749,9 +744,6 @@ var AgeUnderDefaultStrategy = function(){
         var keys = dataProvider.getKeys();
         var defaultKey = keys[0];
         var rateTableGuideItem = dataProvider.get(defaultKey);
-
-        console.log("AgeUnderDefaultStrategy rateTableGuideItem:");
-        console.log(rateTableGuideItem);
 
         var defaultDeductible = rateTableGuideItem.get('deductible');
         var defaultTable = rateTableGuideItem.get('premiumTable');
@@ -850,7 +842,6 @@ var RateTableGuide = function(){
             return defaultData;
         },
         isMedicalDeclarationRequired:function(age, useSCCC){
-            console.log("isMedicalDeclarationRequired   age="+age+"  useSccc="+useSCCC);
             var operation = new GetMedicalDeclarationRequiredOperation();
             var strategy = new AgeOverDefaultStrategy();
             operation.setStrategy(strategy);
@@ -1263,7 +1254,6 @@ var CompanyModel = function(){
     }
 
     function getCostsForPerson(person){
-        console.log("Company",name,"getCostsForPerson ",person.getAge());
         selectedAge = person.getAge();
         var useSCCC = person.getIsUseSCCC();
 
@@ -1322,7 +1312,6 @@ var CompanyModel = function(){
     }
 
     function calculateByIndividuals(persons){
-        //console.log("Company ",name,"  calculateByIndividuals. persons: ",persons);
 
         var personsIterator = persons.getIterator();
         while(personsIterator.hasNext()){
@@ -1365,7 +1354,6 @@ var CompanyModel = function(){
             return rateTableGuideData;
         },
         isMedicalDeclarationRequired:function(age, useSCCC){
-            console.log("Company "+name+"  isMedicalDeclarationRequired age="+age+"  useSCCC="+useSCCC);
             return rateTableGuide.isMedicalDeclarationRequired(age, useSCCC);
         },
         setDeductibleAmountOptions:function(jsonString){
@@ -1456,7 +1444,6 @@ var CompanyTableRowView = function(){
         var companyName = element.attr("data-companyName");
         var companyId = element.attr("data-companyid");
         var medicalDeclarationRequired = element.attr("data-medicalDeclarationRequired");
-        console.log("clicked element = "+element.attr("id")+"  companyId="+element.attr("data-companyId")+ "name:"+companyName+"  medicalDeclarationRequired="+medicalDeclarationRequired);
         onSelect(companyName, companyId, medicalDeclarationRequired);
     }
 
@@ -1472,8 +1459,6 @@ var CompanyTableRowView = function(){
     return{
         create:function(companyModel){
             company = companyModel;
-
-            console.log("company: ",company);
 
             var name = company.getName();
             var id = company.getId();
@@ -2184,7 +2169,6 @@ var ResultTableEmail = function(){
             if(emailValid){
                 var data = {'action':'sendResultFormEmail', 'data':emailData, receiver:receiverEmail};
                 $.post(ajaxurl, data, function(response) {
-                    console.log("email sending response: "+response);
                     var responseData = JSON.parse(response);
                     var result = responseData.result;
 
@@ -2371,7 +2355,6 @@ var PersonQuestionsView = (function () {
         var dataDecoder = new MapJsonDecoder(response);
         var map = dataDecoder.decode();
         var parsedQuestions = QuestionCollectionParser.parse(map, '');
-        console.log("this.person.getMedicalDeclarationRequired()=" + this.person.getMedicalDeclarationRequired());
         if (!this.person.getMedicalDeclarationRequired()) {
             var collectionCutter = new QuestionCollectionCutter(parsedQuestions);
             var cuttedQuestions = collectionCutter.getQuestionsBeforeFirstBoolean();
@@ -2481,7 +2464,6 @@ var PageFactory = (function () {
     function PageFactory() {
     }
     PageFactory.create = function (type) {
-        console.log("PageFactory create by type " + type);
         if (type == "companiesTablePage") {
             return new CompaniesByUserDataPageTS();
         }
@@ -2752,21 +2734,6 @@ var CompaniesByUserDataPageTS = (function (_super) {
     return CompaniesByUserDataPageTS;
 }(BasePage));
 
-// TODO удалить после тестов
-var QuizTestingPage = (function (_super) {
-    __extends(QuizTestingPage, _super);
-    function QuizTestingPage() {
-        _super.call(this);
-    }
-    QuizTestingPage.prototype.create = function () {
-        var questionsData = this.$j("#sampleQuestions").text();
-        console.log("Quiz testing page create...");
-        console.log("questions: " + questionsData);
-        //new FrontendUserQuestions()
-        new FrontendUserQuestions(questionsData, "questionsRootContainer");
-    };
-    return QuizTestingPage;
-}(BasePage));
 
 
 // PersonDetailsPage
@@ -2907,7 +2874,6 @@ var PersonDetailsPage = (function (_super) {
         this.onCurrentPersonChanged();
     };
     PersonDetailsPage.prototype.navigateTo = function (page) {
-        console.log("navigate to " + page);
         //this.$j("#confirmationHeaderContainer").text("Please wait...");
         //this.$j("#personDetailsContainer").hide();
         if (page == "/medicalissusselectionpage") {
@@ -2977,7 +2943,6 @@ var CardDetailsConfirmationView = (function () {
 
 var SaveApplication = (function () {
     function SaveApplication(companyData, quoteId, personsData, persons) {
-        console.log("saving application quoteId=", quoteId.getId(), " tempId:", quoteId.getTempValue());
         this.$j = jQuery.noConflict();
         this.companyData = companyData;
         this.quoteId = quoteId;
@@ -3012,7 +2977,6 @@ var SaveApplication = (function () {
         if (!applicationType) {
             applicationType = ApplicationType.HAS_MEDICAL_ISSUES;
         }
-        console.log("application type: " + applicationType);
         this.quoteDataToSave = {
             quoteId: this.quoteId.getId(),
             companyName: this.companyData.companyName,
@@ -3052,26 +3016,15 @@ var MedIssuesSelectionPage = (function (_super) {
         this.prevPage = "person-details";
         this.nextPage = "finish-application";
         this.nextPageHasMedicalIssues = "finish-application-has-medical-issues";
-        //console.log("MedIssuesSelectionPage");
     }
     MedIssuesSelectionPage.prototype.create = function () {
-        /*
-         this.persons = this.getPersons();
-         this.companyData = this.getCompany();
-         this.createQuoteId();
-         this.loadQuotePersonsData();
-         console.log("QuoteId: id=",this.quoteId.getId(),"tempValue:",this.quoteId.getTempValue());
-         */
         this.finishButton = this.$j("#finishButton");
         this.prevButton = this.$j("#prevButton");
         this.payNowButton = this.$j(".wspsc_add_cart_submit");
         this.cartCheckoutButton = this.$j(".wspsc_add_cart_submit");
-        //console.log("pay now button: ",this.payNowButton);
         this.createButtonsListener();
         this.createRadioGroupListener();
         this.updateApplicationType("NORMAL");
-        //this.decorateApplicationIdWithCurrentDate();
-        //this.saveApplicationId();
         this.updateApplicationIdContainer();
         this.updatePayPalCostInput();
     };
@@ -3096,13 +3049,8 @@ var MedIssuesSelectionPage = (function (_super) {
         }
     };
     MedIssuesSelectionPage.prototype.onPersonsDataValid = function () {
-        console.log("persons data is valid. Data is: ", this.personsData);
-        //this.$j("#quoteDate").text(this.$j("#quoteData").val());
         this.createPayNowButtonListener();
         this.createCartCheckoutButtonListener();
-        //this.saveApplication();
-        //this.onApplicationSaved();
-        //this.deletePersonsTempData();
     };
     MedIssuesSelectionPage.prototype.saveApplication = function () {
         new SaveApplication(this.companyData, this.quoteId, this.personsData, this.persons);
@@ -3157,7 +3105,6 @@ var MedIssuesSelectionPage = (function (_super) {
         return companyData;
     };
     MedIssuesSelectionPage.prototype.updateApplicationType = function (type) {
-        console.log("updateApplicationType " + type);
         Cookie.setApplicationType(type);
     };
     /*
@@ -3180,25 +3127,18 @@ var MedIssuesSelectionPage = (function (_super) {
         this.payNowButton.click(function (event) { return _this.onPayNowButtonClicked(event); });
     };
     MedIssuesSelectionPage.prototype.onPayNowButtonClicked = function (event) {
-        console.log("PAY NOW OR cart checkout BUTTON CLICKED");
         this.saveApplication();
-        //return false;
-        //event.stopPropagation();
-        //return ReadForm(this, true);
     };
     MedIssuesSelectionPage.prototype.createCartCheckoutButtonListener = function () {
-        console.log("createCartCheckoutButtonListener");
         this.cartCheckoutButton
             .unbind('click') // takes care of jQuery-bound click events
             .attr('onclick', '') // clears `onclick` attributes in the HTML
             .each(function () {
                 this.onclick = null;
             });
-        //this.cartCheckoutButton.click((event:any)=>this.onPayNowButtonClicked(event));
     };
     MedIssuesSelectionPage.prototype.updatePayPalCostInput = function () {
         var totalPremium = this.$j("input[name='totalPremiumValueInput']").val();
-        console.log("totalPremium: " + totalPremium);
         this.$j("input[name='price']").val(totalPremium);
     };
     return MedIssuesSelectionPage;
@@ -3348,7 +3288,6 @@ var CardDetailsPage = (function () {
         return isValid;
     };
     CardDetailsPage.prototype.validateConfirmation = function () {
-        console.log("validateConfirmation ");
         var isConfirmed = this.confirmationView.isConfirmed();
         if (isConfirmed == false) {
             this.showError("Error. You must confirm card details.");
@@ -3535,7 +3474,6 @@ var BenefitSelectionPage = function(){
     }
 
     function onPrevButtonClicked(){
-        console.log("prev clicked");
         NavigatorUtil.navigateTo(prevPage);
     }
 
@@ -3547,15 +3485,12 @@ var BenefitSelectionPage = function(){
             var savedFormData = Cookie.getUserInputFormData();
             parsedData = StringUtils.parseURI(savedFormData);
 
-            //console.log("parsedData",parsedData);
-
             if(!parsedData){
                 parsedData = {benefit:null};
             }
             savedBenefit = parsedData.benefit;
 
             useSCCC = parsedData.useSccc == "Yes" ? true : false;
-            //console.log("useSCCC="+useSCCC);
 
             createPersons();
             savePersons();
@@ -3721,8 +3656,6 @@ var PersonsAdditionalDataRequestView = (function () {
     };
     PersonsAdditionalDataRequestView.prototype.createArrivalDatePicker = function () {
         var _this = this;
-        console.log("createArrivalDatePicker");
-        console.log("default date: ", new Date());
         this.arrivalDateControl.datepicker({
             changeYear: true,
             yearRange: '-10:+10',
@@ -3731,7 +3664,6 @@ var PersonsAdditionalDataRequestView = (function () {
         });
     };
     PersonsAdditionalDataRequestView.prototype.updateControls = function () {
-        console.log("update controls this.savedArrivalDate=" + this.savedArrivalDate);
         if (this.savedCountryOfOrigin) {
             this.countryOfOriginControl.val(unescape(this.savedCountryOfOrigin));
         }
@@ -3934,7 +3866,6 @@ var ApplicationCreationPage = (function (_super) {
     };
     ApplicationCreationPage.prototype.onNextButtonClick = function () {
         this.hideError();
-        console.log("this.personsAdditionalDataRequestView=" + this.personsAdditionalDataRequestView);
         var validateResult = this.personsAdditionalDataRequestView.validate();
         var dataIsValid = validateResult.isValid;
         if (!dataIsValid) {
@@ -4046,7 +3977,6 @@ var ApplicationFinishPage = (function (_super) {
         resultEmailPage.create();
     };
     ApplicationFinishPage.prototype.saveApplication = function () {
-        //console.log("saving application...");
         var quoteSaver = new QuoteSaver();
         var period = Cookie.getPeriod();
         var encodedPlanData = Cookie.getCompanyPlan();
@@ -4170,20 +4100,6 @@ var ApplicationFinishPage = (function (_super) {
     return ApplicationFinishPage;
 }(BasePage));
 
-var ApplicationFinishPageHasMedicalIssues = (function (_super) {
-    __extends(ApplicationFinishPageHasMedicalIssues, _super);
-    function ApplicationFinishPageHasMedicalIssues() {
-        _super.call(this);
-    }
-    ApplicationFinishPageHasMedicalIssues.prototype.onApplicationSaved = function () {
-        console.log("Application saved - sending email...");
-        //var resultEmailPage:SendResultEmailPage = new SendResultEmailPage();
-        //resultEmailPage.create();
-    };
-    return ApplicationFinishPageHasMedicalIssues;
-}(ApplicationFinishPage));
-
-
 // SendResultEmailPage
 var SendResultEmailPage = (function () {
     function SendResultEmailPage(applicationType) {
@@ -4203,7 +4119,6 @@ var SendResultEmailPage = (function () {
         this.updateBody();
         this.iteratePersons();
         var personsShortInfoHtml = this.createPersonsShortInfoHTML();
-        console.log(personsShortInfoHtml);
         this.$j("#personsShortInfoContainer").html(personsShortInfoHtml);
         this.emailBodyHtml = this.$j("#emailBody").html();
         this.emailBodyHtml = this.decorateEmailBody();
@@ -4215,12 +4130,10 @@ var SendResultEmailPage = (function () {
     };
     SendResultEmailPage.prototype.onHTMLExportComplete = function (result) {
         //TODO validate result
-        console.log("onHTMLExportComplete. result: " + result);
         var parsedResult = JSON.parse(result);
         this.appId = parsedResult.appId;
         this.applicationHtmlFileUrl = parsedResult.url;
         console.log("applicationHtmlFileUrl=" + this.applicationHtmlFileUrl);
-        //this.emailBody = '<b>Thanks</b> for your application. You can download it using this link <p><a href="'+applicationHtmlFileUrl+'" target="_blank">'+applicationHtmlFileUrl+'</a></p><p>Best regards</p>';
         this.composeEmailBody();
         this.sendApplicationAdminEmail();
     };
@@ -4262,7 +4175,6 @@ var SendResultEmailPage = (function () {
     };
     SendResultEmailPage.prototype.parseQuoteData = function (data) {
         this.data = JSON.parse(data);
-        //console.log("Quote data: ",this.data);
         this.quoteData = JSON.parse(this.data.quoteData);
         this.persons = this.getPersons();
         this.receiver = unescape(this.data.email);
@@ -4352,7 +4264,6 @@ var SendResultEmailPage = (function () {
 var $ = jQuery.noConflict();
 var companyFamilyRateMinNumPersons = 3;
 $(document).ready(function($) {
-    console.log('FrontendInit');
     var $window = $( window );
     var $navBar = $( '.navbar' );
     var $body = $( 'body' );
@@ -4374,20 +4285,3 @@ $(document).ready(function($) {
         page.create();
     }
 });
-
-// TESTING
-var ComposeEmailTestingPage = (function (_super) {
-    __extends(ComposeEmailTestingPage, _super);
-    function ComposeEmailTestingPage() {
-        _super.call(this);
-    }
-    ComposeEmailTestingPage.prototype.create = function () {
-        console.log("ComposeEmailTestingPage create...");
-        var emails = new Emails();
-        var hasMedicalIssuesEmailText = emails.composeMedicalIssuesEmailText("111");
-        var hasNoMedicalIssuesEmailText = emails.composeNoMedicalIssuesEmailText("222");
-        console.log("hasMedicalIssuesEmailText = " + hasMedicalIssuesEmailText);
-        console.log("hasNoMedicalIssuesEmailText = " + hasNoMedicalIssuesEmailText);
-    };
-    return ComposeEmailTestingPage;
-}(BasePage));

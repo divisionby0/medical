@@ -10,7 +10,7 @@ class IncludeScripts {
 
     public function start(){
         $this->pluginDir = $this->getPluginDir();
-        wp_enqueue_script('adminCode', $this->pluginDir.'js/adminCode.js');
+        wp_enqueue_script('adminCode', $this->pluginDir.'js/adminCode.min.js');
 
         $this->addCSS();
         $this->registerJsScripts();

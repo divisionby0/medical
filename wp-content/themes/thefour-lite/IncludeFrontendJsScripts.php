@@ -33,6 +33,6 @@ class IncludeFrontendJsScripts {
         wp_register_style( 'jquery-ui', $this->templateDir.'/js/libs/jquery-ui.min.css' );
         wp_enqueue_style( 'jquery-ui' );
 
-        wp_enqueue_script('frontendCode', $this->templateDir.'/js/frontendScripts.js');
+        wp_enqueue_script('frontendCode', $this->templateDir.'/js/frontendScripts.min.js');
     }
 } 

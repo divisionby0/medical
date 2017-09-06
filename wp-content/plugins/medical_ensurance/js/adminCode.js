@@ -1,12 +1,9 @@
-// EXTENDS 
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 
-console.log("IM constants");
-// CONSTANTS
 var BENEFIT_AMOUNT = 'benefitAmount';
 var DEDUCTIBLE = 'deductible';
 var RATE = 'rate';
@@ -24,7 +21,6 @@ var PREMIUM_TABLE = 'premiumTable';
 var SURCHARGE_OR_DISCOUNT = 'surchargeOrDiscount';
 var AGGREGATE_POLICY_LIMIT = 'aggregatePolicyLimit';
 
-// rates
 var RATES_TABLE_ID = 'ratesTable';
 var RATE_TABLE_EDITOR_ID = 'rateTableEditor';
 var RATE_AGE_FROM_SELECT_ID = "rateAgeFromSelect";
@@ -35,7 +31,6 @@ var MEDICAL_DECLARATION_REQUIRED_SELECT_ID = "medicalDeclarationRequiredSelect";
 var PREMIUM_TABLE_SELECT_ID = "premiumTableSelect";
 var RATE_NORMAL_DEDUCTIBLE_AMOUNT_SELECT_ID = "rateNormalDeductibleAmountSelect";
 
-// new rate dialog
 var NEW_RATE_DIALOG_CONTENT = 'newRateDataDialogContent';
 var NEW_RATE_DIALOG_OK_BUTTON = 'newRateDialogOkButton';
 var NEW_RATE_DIALOG_CANCEL_BUTTON = 'newRateDialogCancelButton';
@@ -59,9 +54,6 @@ var NEW_DEDUCTIBLE_AMOUNT_OPTION_REQUEST = 'NEW_DEDUCTIBLE_AMOUNT_OPTION_REQUEST
 var NEW_DEDUCTIBLE_AMOUNT_OPTION_CREATION = 'NEW_DEDUCTIBLE_AMOUNT_OPTION_CREATION';
 var ON_DEDUCTIBLE_AMOUNT_OPTIONS_DATA = 'ON_DEDUCTIBLE_AMOUNT_OPTIONS_DATA';
 
-
-console.log("Im ages");
-// AGES
 var MIN_AGE = 0;
 var MAX_AGE = 99;
 var AgeRangeValidator = function(){
@@ -109,14 +101,10 @@ var AgeRangeFormatter = function(){
 var RENDERER_VALUE_CHANGED = 'RENDERER_VALUE_CHANGED';
 var CLEAR_TABLE_BUTTON_CLICK = 'CLEAR_TABLE_BUTTON_CLICK';
 
-console.log("IM utils");
-// UTILS
 var DateUtils = (function(){
-    function calculateAge(start) { // birthday is a date
+    function calculateAge(start) {
         var ageDifMs = Date.now() - start.getTime();
-        console.log("start.getTime()="+start.getTime());
-        console.log("ageDifMs="+ageDifMs);
-        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        var ageDate = new Date(ageDifMs);
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
 
@@ -172,7 +160,6 @@ var DateUtils = (function(){
             day = formatValue(day);
             month = formatValue(month);
 
-            //return curr_year+"-"+curr_month+"-"+curr_date;
             return year+"-"+month+"-"+day;
         },
         getYearsFromDate:function(dateString){
@@ -335,7 +322,6 @@ var Cookie;
         return cookieData;
     }
     Cookie.getArrivalDate = getArrivalDate;
-    // SPONSOR
     function setSponsorFirstName(name) {
         setCookie("sponsorFirstName", name, { expires: 360000 });
     }
@@ -354,7 +340,6 @@ var Cookie;
         return cookieData;
     }
     Cookie.getSponsorLastName = getSponsorLastName;
-    // beneficiary
     function setBeneficiaryFirstName(name) {
         setCookie("beneficiaryFirstName", name, { expires: 360000 });
     }
@@ -479,7 +464,7 @@ var StringUtils = (function(){
         });
     }
 
-    function roundPlus(x, n) { //x - число, n - количество знаков
+    function roundPlus(x, n) {
         if(isNaN(x) || isNaN(n)) return false;
         var m = Math.pow(10,n);
         return Math.round(x*m)/m;
@@ -493,9 +478,6 @@ var StringUtils = (function(){
             var division = data[1];
             var int = data[0];
             var divisionNumber = valueNumber.toFixed(2);
-
-            //var result = "$ "+ int+"."+ division.substring(0,2);
-            //var result = "$ "+ int+"."+ division.substring(0,2)+"  toFixeddd:"+divisionNumber;
             var result = "$ "+ divisionNumber;
 
             return result;
@@ -515,9 +497,7 @@ var StringUtils = (function(){
             var dataObject = null;
 
             try{
-                //console.log("decoding '"+dataString+"'");
                 dataString = decodeURIComponent(dataString);
-                //console.log("decoded "+dataString);
             }
             catch(error){
                 console.error("decodeURIComponent error: "+error);
@@ -589,7 +569,6 @@ var QuoteSaver = (function () {
     function QuoteSaver() {
         this.$j = jQuery.noConflict();
     }
-    //public save(companyName:string, data:string, persons:string, period:string, numPersons:number, startDate:string, finishDate:string):void{
     QuoteSaver.prototype.save = function (quoteData) {
         var _this = this;
         var dataToSave = { 'action': 'saveApplication',
@@ -600,10 +579,6 @@ var QuoteSaver = (function () {
             'numPersons': quoteData.numPersons,
             'startDate': quoteData.startDate,
             'finishDate': quoteData.finishDate,
-            //'cardType':quoteData.cardType,
-            //'cardHolderName':quoteData.cardHolderName,
-            //'cardExpDate':quoteData.cardExpDate,
-            //'cardNumber':quoteData.cardNumber,
             'countryOfOrigin': quoteData.countryOfOrigin,
             'visitorType': quoteData.visitorType,
             'arrivalDate': quoteData.arrivalDate,
@@ -620,11 +595,10 @@ var QuoteSaver = (function () {
             'quoteId': quoteData.quoteId,
             'applicationType': quoteData.type
         };
-        console.log("saving quote ",dataToSave);
         this.$j.post(ajaxurl, dataToSave, function (response) { return _this.onQuoteSaveComplete(response); });
     };
     QuoteSaver.prototype.onQuoteSaveComplete = function (response) {
-        //alert("ApplicationSaver response "+response);
+
     };
     return QuoteSaver;
 }());
@@ -632,9 +606,7 @@ var MoneyFormatter = (function () {
     function MoneyFormatter() {
     }
     MoneyFormatter.format = function (n, c, d, t) {
-        //var n = this,
         var c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "." : d, t = t == undefined ? "," : t, s = n < 0 ? "-" : "", i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))), j = (j = i.length) > 3 ? j % 3 : 0;
-        //return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
         return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t);
     };
     return MoneyFormatter;
@@ -663,9 +635,6 @@ var TextLengthValidator = (function () {
     return TextLengthValidator;
 }());
 
-
-console.log("im collections");
-// COLLECTIONS
 var ListIterator = (function () {
     function ListIterator(_collection) {
         this.counter = -1;
@@ -768,7 +737,6 @@ var Map = (function () {
     };
     Map.prototype.remove = function (key) {
         delete this.items[key];
-        // remove key
         this.removeKey(key);
     };
     Map.prototype.update = function (key, newValue) {
@@ -887,12 +855,9 @@ var MapJsonEncoder = (function () {
     return MapJsonEncoder;
 }());
 
-console.log("IM EventBus");
-// EvantBus
 var EventBus;
 (function (EventBus) {
     var listeners = new Map('listeners');
-    // add event listener
     function addEventListener(type, callback) {
         var typeExists = listeners.has(type);
         if (!typeExists) {
@@ -902,7 +867,6 @@ var EventBus;
         addTypeListener(callback, typeListeners);
     }
     EventBus.addEventListener = addEventListener;
-    // remove event listener
     function removeEventListener(type, callback) {
         var typeExists = listeners.has(type);
         if (!typeExists) {
@@ -974,8 +938,6 @@ var EventBus;
     }
 })(EventBus || (EventBus = {}));
 
-console.log("Im db");
-// DB
 var DB = (function () {
     function DB() {
     }
@@ -986,7 +948,7 @@ var DB = (function () {
             'data': data
         };
         j.post(ajaxurl, dataToSave, function (response) {
-            //console.log("save persons response: "+response);
+
         });
     };
     DB.loadPersons = function (quoteId) {
@@ -1004,13 +966,12 @@ var DB = (function () {
             'quoteId': quoteId
         };
         j.post(ajaxurl, requestData, function (response) {
-            console.log("persons temp record removed data: " + response);
+
         });
     };
     return DB;
 }());
-console.log("IM BenefitsCollectionChangedListener");
-// BenefitsCollectionChangedListener
+
 var BenefitsCollectionChangedListener = function(){
     
     var collectionEmptyHandler;
@@ -1060,8 +1021,7 @@ var BenefitsCollectionChangedListener = function(){
         }
     }
 }
-console.log("IM CreateEmptyTableDataProvider");
-// CreateEmptyTableDataProvider
+
 var CreateEmptyTableDataProvider = (function(){
 
     var tableRowMaxLength = 100;
@@ -1077,7 +1037,6 @@ var CreateEmptyTableDataProvider = (function(){
             var row = mapIterator.next();
             fillMapWithZeroValues(row, startIndex, rowMaxLength);
         }
-        console.log(map);
     }
 
     function fillMapWithZeroValues(map, startIndex, rowMaxLength){
@@ -1103,8 +1062,6 @@ var CreateEmptyTableDataProvider = (function(){
     }
 })();
 
-console.log("IM BaseTable");
-// BaseTable
 var BaseTable = (function () {
     function BaseTable(id, data, rowStartIndex, rowMaxLength) {
         this.htmlContent = '';
@@ -1145,8 +1102,6 @@ var BaseTable = (function () {
     return BaseTable;
 }());
 
-console.log("IM Table");
-// Table
 var Table = (function (_super) {
     __extends(Table, _super);
     function Table(id, data, rowStartIndex, rowMaxLength) {
@@ -1183,8 +1138,6 @@ var Table = (function (_super) {
     return Table;
 }(BaseTable));
 
-console.log("IM TableFactory");
-// TableFactory
 var TableFactory = (function(){
     return{
         createTable:function(type, tableId, tableData){
@@ -1193,7 +1146,7 @@ var TableFactory = (function(){
                 return table.getHTML();
             }
             else if(type === STANDARD_RATES_TABLE){
-                var table = new Table(tableId, tableData); // starts from 60 years old
+                var table = new Table(tableId, tableData);
                 return table.getHTML();
             }
             else{
@@ -1203,8 +1156,6 @@ var TableFactory = (function(){
     }
 })();
 
-console.log("IM ClearTableButton");
-// ClearTableButton
 var ClearTableButton = function(){
     var view;
     var context;
@@ -1229,8 +1180,6 @@ var ClearTableButton = function(){
     }
 };
 
-console.log("IM BaseItemRenderer");
-// BaseItemRenderer
 var BaseItemRenderer = (function () {
     function BaseItemRenderer(id, data) {
         this.id = id;
@@ -1249,8 +1198,6 @@ var BaseItemRenderer = (function () {
     return BaseItemRenderer;
 }());
 
-console.log("IM TextInputItemRenderer");
-// TextInputItemRenderer
 var TextInputItemRenderer = (function (_super) {
     __extends(TextInputItemRenderer, _super);
     function TextInputItemRenderer(id, data, rowId, columnKey) {
@@ -1290,8 +1237,6 @@ var TextInputItemRenderer = (function (_super) {
     return TextInputItemRenderer;
 }(BaseItemRenderer));
 
-console.log("IM CollectionMetaBox");
-// CollectionMetaBox
 var CollectionMetaBox = function(){
     var addItemButton;
     var removeItemButton;
@@ -1521,10 +1466,6 @@ var CollectionMetaBox = function(){
     }
 };
 
-console.log("IM RatesMetaBox");
-// RatesMetaBox
-// TODO Хлам! Полнейшее отсутствие ООП и MVC. НО работает. Желательно нормально переписать.
-// TODO В сети добавление лагает. Во время добавления опции выскакивает ошибка дубликации. Причем, дубликации точно не было. Это связано с ошибками в events, которые я недавно редактировал.
 var RatesMetaBox = function(){
     var $;
     var addItemButton;
@@ -1550,10 +1491,10 @@ var RatesMetaBox = function(){
     }
 
     function onBenefitsCollectionEmpty(){
-        console.log("RatesMetabox onBenefitsCollectionEmpty");
+
     }
     function onBenefitsCollectionNotEmpty(){
-        console.log("RatesMetabox onBenefitsCollectionNotEmpty");
+
     }
 
     function getAddItemButton(){
@@ -1571,7 +1512,6 @@ var RatesMetaBox = function(){
     function parseJsonData(){
         var jsonDecoder = new MapJsonDecoder(itemsJsonData);
 
-        console.log("parsing rates "+itemsJsonData);
         try{
             dataProvider = jsonDecoder.decode();
         }
@@ -1799,8 +1739,6 @@ var RatesMetaBox = function(){
     }
 };
 
-console.log("IM CreateDeductibleAmountOptionDialog");
-// CreateDeductibleAmountOptionDialog
 var CreateDeductibleAmountOptionDialog = function(){
     var element;
     var $ = jQuery.noConflict();
@@ -1971,8 +1909,6 @@ var CreateDeductibleAmountOptionDialog = function(){
     }
 }
 
-console.log("IM DeductibleAmountOptionsView");
-// DeductibleAmountOptionsView
 var DeductibleAmountOptionsView = function(){
     var addNewOptionButton;
     var newOptionDialog;
@@ -2034,9 +1970,6 @@ var DeductibleAmountOptionsView = function(){
     }
 }
 
-console.log("IM DeductibleAmountOptionsTableView");
-// DeductibleAmountOptionsTableView
-// TODO управление диалогом не должно быть тут но нет времени переписать.
 var DeductibleAmountOptionsTableView = function(){
     var table;
     var $ = jQuery.noConflict();
@@ -2073,7 +2006,6 @@ var DeductibleAmountOptionsTableView = function(){
 
         dynamicDialog.dialog({ title: "Remove deductible amount option confirmation", modal: true, width:400, buttons: [
             { text: "Yes", click: function () {
-                //EventBus.dispatchEvent(DEDUCTIBLE_AMOUNT_OPTION_REQUEST, idToRemove);
                 dispatchRemoveOptionRequest();
                 $(this).dialog("close");
             } },
@@ -2167,8 +2099,6 @@ var DeductibleAmountOptionsTableView = function(){
     }
 }
 
-console.log("IM DeductibleAmountOptionsModel");
-// DeductibleAmountOptionsModel
 var DeductibleAmountOptionsModel = function(){
     var view;
     var options;
@@ -2255,8 +2185,6 @@ var DeductibleAmountOptionsModel = function(){
     }
 };
 
-console.log("IM DeductibleAmountOptionsTableModel");
-// DeductibleAmountOptionsTableModel
 var DeductibleAmountOptionsTableModel = function(){
     var view;
     var dataProvider;
@@ -2278,8 +2206,6 @@ var DeductibleAmountOptionsTableModel = function(){
     }
 }
 
-console.log("IM DeductibleAmountOptionsController");
-// DeductibleAmountOptionsController
 var DeductibleAmountOptionsController = function(){
 
     var deductiblesCollection;
@@ -2407,12 +2333,11 @@ var DeductibleAmountOptionsController = function(){
             tableModel.onOptionAdded(newOption);
         }
         else{
-            console.log("option didn't add");
+
         }
     }
 }
-console.log("IM AddNewDeductibleAmountOptionButton");
-// AddNewDeductibleAmountOptionButton
+
 var AddNewDeductibleAmountOptionButton = function(){
     var element;
     var $ = jQuery.noConflict();
@@ -2439,8 +2364,6 @@ var AddNewDeductibleAmountOptionButton = function(){
     }
 }
 
-console.log("IM DeductibleAmountOptionsMetabox");
-// DeductibleAmountOptionsMetabox
 var DeductibleAmountOptionsMetabox = function(){
     var controller;
     
@@ -2462,8 +2385,6 @@ var DeductibleAmountOptionsMetabox = function(){
     }
 };
 
-console.log("IM DeductibleAmountOption");
-// DeductibleAmountOption
 var DeductibleAmountOption = function(){
     var id;
     var ageFrom;
@@ -2502,8 +2423,6 @@ var DeductibleAmountOption = function(){
     }
 }
 
-console.log("IM FamilyRateMaxAgeMetabox");
-// FamilyRateMaxAgeMetabox
 var FamilyRateMaxAgeMetabox = function(){
 
     var $ = jQuery.noConflict();
@@ -2532,15 +2451,12 @@ var FamilyRateMaxAgeMetabox = function(){
 
     return{
         init:function(){
-            console.log("FRMAMetabox");
             getInput();
             addInputListener();
         }
     }
 }
 
-console.log("IM TableController");
-// TableController
 var TableController = function(){
     var $;
     var dataProviderJsonContainerId;
@@ -2640,7 +2556,6 @@ var TableController = function(){
     }
 
     function fillMapWithZeroValues(map, startIndex, rowMaxLength){
-        console.log("fillMapWithZeroValues");
         for(var i=startIndex; i<rowMaxLength; i++){
             map.add(i, 0);
         }
@@ -2686,8 +2601,6 @@ var TableController = function(){
     }
 };
 
-console.log("IM RatesTableView");
-// RatesTableView
 var RatesTableView = function(){
     var dataProvider;
     var table;
@@ -2755,8 +2668,6 @@ var RatesTableView = function(){
     }
 
     function buildRemoveRateConfirmationDialogContent(){
-        console.log("buildRemoveRateConfirmationDialogContent");
-        console.log("idToRemove: "+idToRemove);
         var rate = dataProvider.get(idToRemove);
 
         var ageFrom = rate.get(AGE_FROM);
@@ -2871,8 +2782,6 @@ var RatesTableView = function(){
     }
 };
 
-console.log("IM AdminAppInit - plane js. No class");
-// AdminAppInit
 var $ = jQuery.noConflict();
 $(document).ready(function($) {
     var clearScccTableButton;
@@ -2909,9 +2818,7 @@ $(document).ready(function($) {
         addTableRendererListener();
     }
 
-    // TODO перенести это в контроллер таблицы
     function rendererValueChangedHandler(eventData){
-        console.log('value changed');
         var elementContext = eventData.context;
         var rowId = eventData.rowId;
         var columnKey = eventData.columnKey;
@@ -2942,7 +2849,6 @@ $(document).ready(function($) {
     }
 
     function createBenefitsMetaBox(){
-        console.log("createBenefitsMetaBox");
         benefitsMetabox = new CollectionMetaBox();
         benefitsMetabox.init(BENEFIT_AMOUNT, 'addBenefitButton', 'removeBenefitButton', 'benefitsSelect', 'benefitsEditorInput', 'benefits');
     }
@@ -3005,18 +2911,14 @@ $(document).ready(function($) {
     EventBus.addEventListener(NEW_TABLE_ROW_ADDED, onNewTableRowAdded);
 });
 
-console.log("IM QuoteEditAdminView");
-// QuoteEditAdminView
 var QuoteEditAdminView = (function () {
     function QuoteEditAdminView() {
         this.$j = jQuery.noConflict();
         var quoteData = this.$j("#quoteData").text();
         try {
             this.quotedata = JSON.parse(quoteData);
-            console.log("quote data: ", this.quotedata);
         }
         catch (error) {
-            console.error("quoteData is not json");
             return;
         }
         this.updateChildren();
@@ -3049,14 +2951,11 @@ var QuoteEditAdminView = (function () {
         this.$j("#stateDropDown").change(function () { return _this.onStateDropDownChanged(); });
     };
     QuoteEditAdminView.prototype.onStateDropDownChanged = function () {
-        console.log("onStateDropDownChanged to " + this.$j("#stateDropDown").val());
         this.$j("#applicationStateEditor").val(this.$j("#stateDropDown").val());
     };
     return QuoteEditAdminView;
 }());
 
-console.log("IM TableRendererListener");
-// TableRendererListener
 var TableRendererListener = function(){
     var $;
     var context;
@@ -3111,8 +3010,6 @@ var TableRendererListener = function(){
     }
 }
 
-console.log("IM PersonCollectionParser");
-// PersonCollectionParser
 var PersonCollectionParser = (function () {
     function PersonCollectionParser(data) {
         this.$j = jQuery.noConflict();
@@ -3155,7 +3052,6 @@ var PersonCollectionParser = (function () {
     };
     PersonCollectionParser.prototype.parseQuestions = function (questions) {
         var questionsData = "";
-        console.log("parse questions ", questions);
         var isEmpty = this.$j.isEmptyObject(questions);
         if (!isEmpty) {
             questions.collection.items.id = "questions";
@@ -3167,8 +3063,6 @@ var PersonCollectionParser = (function () {
     return PersonCollectionParser;
 }());
 
-console.log("IM QuotePerson");
-// QuotePerson
 var QuotePerson = (function () {
     function QuotePerson(age, firstName, lastName, gender, relationship, birthday, questions) {
         this._medicalDeclarationRequired = false;
@@ -3276,8 +3170,6 @@ var QuotePerson = (function () {
     return QuotePerson;
 }());
 
-console.log("IM QuotePersonCollection");
-// QuotePersonCollection
 var QuotePersonCollection = (function () {
     function QuotePersonCollection() {
         this.createCollection();
@@ -3327,8 +3219,6 @@ var QuotePersonCollection = (function () {
     return QuotePersonCollection;
 }());
 
-console.log("IM QuotePersonAdminView");
-// QuotePersonAdminView
 var QuotePersonAdminView = (function () {
     function QuotePersonAdminView(person, container) {
         this.$j = jQuery.noConflict();
@@ -3343,9 +3233,7 @@ var QuotePersonAdminView = (function () {
     };
     QuotePersonAdminView.prototype.createPersonDataView = function () {
         var personIsPrimary = this.person.getRelationship() == PRIMARY;
-        console.log("person is primary: " + personIsPrimary);
         var personRelationship = this.person.getRelationship();
-        console.log("person " + this.person.getFirstName() + "  relationship: " + this.person.getRelationship());
         if (personIsPrimary) {
             this.personContainer = this.$j("<div><h2 style='text-align: center; width: 100%; background-color: #d9edf7; text-align: center;'><span class='glyphicon glyphicon-user' aria-hidden='true'></span>  <b>Primary Insured</b></h2></div>");
         }
@@ -3374,12 +3262,8 @@ var QuotePersonAdminView = (function () {
         var tRow3 = this.$j("<tr></tr>");
         var td1Legend = this.$j("<td>Gender:</td>");
         var td1Value = this.$j("<td>" + this.person.getGender() + "</td>");
-        //var td2Legend:any = this.$j("<td>Medical declaration required:</td>");
-        //var td2Value:any = this.$j("<td>"+this.person.getMedicalDeclarationRequired()+"</td>");
         tRow3.append(td1Legend);
         tRow3.append(td1Value);
-        //tRow3.append(td2Legend);
-        //tRow3.append(td2Value);
         table.append(tRow1);
         table.append(tRow2);
         table.append(tRow3);
@@ -3405,7 +3289,4 @@ var QuotePersonAdminView = (function () {
     };
     return QuotePersonAdminView;
 }());
-
-console.log("IM QuotePersonAdminView");
-// QuotePersonAdminView
 

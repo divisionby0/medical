@@ -409,6 +409,7 @@ function wp_insert_quote(IApplicationPostType $post, $wp_error = false)
 	}
 	return $post_id;
 }
+
 add_action( 'wp_ajax_sendApplicationAdminEmail', 'sendApplicationAdminEmail');
 add_action( 'wp_ajax_nopriv_sendApplicationAdminEmail', 'sendApplicationAdminEmail' );
 

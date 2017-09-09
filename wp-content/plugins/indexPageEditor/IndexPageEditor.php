@@ -19,9 +19,10 @@ $block3Content = '';
 
 function updateBlock($id, $content){
     global $wpdb;
+    
 
     $updateResult = $wpdb->update('wp_indexpageblocks',
-                    array( 'content' => $content),
+                    array( 'content' => stripslashes($content)),
                     array( 'id' => $id ),
                     array( '%s'),
                     array( '%d' ));
@@ -32,7 +33,6 @@ function index_page_editor_setup_menu(){
 }
 
 function test_init(){
-
     if(isset($_POST['importantLinksBlockEditor'])){
         $importantLinksBlockContent = $_POST['importantLinksBlockEditor'];
         updateBlock(0, $importantLinksBlockContent);

@@ -2981,7 +2981,8 @@ result table
   float: left;
   display: block;
   margin: 2px;
-  height: 400px;
+  height: auto;
+  min-height: 100px;
   padding-left: 10px;
   padding-right: 10px;
   -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.22);
@@ -2999,15 +3000,28 @@ result table
   overflow: auto;
 }
 
-.importantLinksAndPagesBlock{
-  width: 70%;
+.videoBlock{
+  width: 100%;
+  height: auto!important;
+  min-height: 10px!important;
 }
-.otherInfoBlock{
-  width: 45%;
+.sliderBlock {
+  width: 400px;
+  height: 200px;
+  margin: auto;
+  padding-top: 20px;
 }
+
+.sliderBlockContainer {
+  float: left;
+  display: block;
+  width: 100%;
+  height: 200px;
+  padding-top: 20px;
+}
+
 .additionsInfoBlock{
-  width: 28%;
-  height: 198px !important;
+  width: 100%;
 }
 
 .emailQuote{
@@ -3049,16 +3063,6 @@ result table
     margin-top: -70px;
 }
 @media (max-width: 991px) {
-  .importantLinksAndPagesBlock{
-    width: 48%;
-  }
-  .otherInfoBlock{
-    width: 48%;
-  }
-  .additionsInfoBlock{
-    width: 48%;
-    height: 234px !important;
-  }
   .userInputForm{
     width: 400px;
   }
@@ -3067,15 +3071,6 @@ result table
   }
 }
 @media (max-width: 600px) {
-  .importantLinksAndPagesBlock{
-    width: 100%;
-  }
-  .otherInfoBlock{
-    width: 100%;
-  }
-  .additionsInfoBlock{
-    width: 100%;
-  }
   .userInputForm{
     width: 100%;
   }
@@ -3118,3 +3113,14 @@ button.ui-datepicker-current {
   width: 50%;
 }
 
+video::-internal-media-controls-download-button {
+  display:none;
+}
+
+video::-webkit-media-controls-enclosure {
+  overflow:hidden;
+}
+
+video::-webkit-media-controls-panel {
+  width: calc(100% + 30px); /* Adjust as needed */
+}

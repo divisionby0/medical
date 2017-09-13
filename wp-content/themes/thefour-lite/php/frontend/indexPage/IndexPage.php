@@ -8,6 +8,7 @@ class IndexPage
     public function __construct()
     {
         $this->pageData = $this->getPageData();
+        //echo '<h2>companyTilesGridData='.$this->pageData->get("companyTilesGridData").'</h2>';
         $this->createBlocks();
     }
 
@@ -53,7 +54,9 @@ class IndexPage
         //echo '<div class="additionsInfoBlock indexPageBlock autoOverflow">'.$block3.'</div>';
         echo '<div class="additionsInfoBlock indexPageBlock autoOverflow">'.$block3_content.'</div>';
 
-        echo '<div class="sliderBlockContainer"><div class="sliderBlock">' .$indexPageSlider->getHTML().'</div></div>';
+        new CompanyTilesGridView($this->pageData->get("companyTilesGridData"));
+        
+        //echo '<div class="sliderBlockContainer"><div class="sliderBlock">' .$indexPageSlider->getHTML().'</div></div>';
         //echo '<div class="sliderBlockContainer"></div>';
     }
 }

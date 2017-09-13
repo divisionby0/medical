@@ -152,6 +152,8 @@ function includeFrontend(){
 
 	include_once('php/Cookie.php');
 	include_once('php/frontend/indexPage/IndexPageSlider.php');
+	include_once('php/frontend/indexPage/GetCompanyTilesGridData.php');
+	include_once('php/frontend/indexPage/CompanyTilesGridView.php');
 	include_once('php/frontend/indexPage/IndexPage.php');
 
 	include_once('IncludeFrontendJsScripts.php');
@@ -177,6 +179,15 @@ function register_general_quote_email_admin_text(){
 	register_setting('general', 'quote_admin_email_text', 'esc_attr');
 	add_settings_field('quote_email_admin_field', '<label for="quote_admin_email_text">'.__('Quote admin email text' , 'quote_admin_email_text' ).'</label>' , 'print_quote_admin_email_text', 'general');
 }
+function register_general_companyCollection_ids(){
+	register_setting('general', 'companyCollection_ids_text', 'esc_attr');
+	add_settings_field('companyCollection_ids_field', '<label for="companyCollection_ids_text">'.__('Company collection ids' , 'companyCollection_ids_text' ).'</label>' , 'print_companyCollection_ids_text', 'general');
+}
+
+function print_companyCollection_ids_text(){
+	$value = get_option( 'companyCollection_ids_text', '' );
+	echo '<input style="width:100%;" type="text" id="companyCollection_ids_text" name="companyCollection_ids_text" value="' . $value . '" />';
+}
 function print_quote_admin_email_text(){
 	$value = get_option( 'quote_admin_email_text', '' );
 	echo '<input style="width:100%;" type="text" id="quote_admin_email_text" name="quote_admin_email_text" value="' . $value . '" />';
@@ -195,6 +206,7 @@ add_filter('admin_init', 'register_general_phone_number');
 //add_filter('admin_init', 'register_general_quote_email_admin_text');
 add_filter('admin_init', 'register_general_index_page_gallery_id');
 add_filter('admin_init', 'register_general_result_table_text_data_max_chars');
+add_filter('admin_init', 'register_general_companyCollection_ids');
 //echo '<h1>ADMIN EMAIL: '.get_bloginfo('admin_email').'</h1>';
 add_filter('wp_headers', 'wpse167128_nocache');
 function wpse167128_nocache($headers)

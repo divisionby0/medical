@@ -11,6 +11,11 @@ class GetIndexPageContent
 
         $pageDataParser = new IndexPageDataParser();
         $pageDataMap = $pageDataParser->parse($result);
+
+        $getCompanyTilesGridData = new GetCompanyTilesGridData();
+        $companyTilesGridData = $getCompanyTilesGridData->getData();
+
+        $pageDataMap->add("companyTilesGridData", $companyTilesGridData);
         return $pageDataMap;
     }
 }

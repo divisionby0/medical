@@ -23,4 +23,8 @@ class MapIterator extends AbstractCollectionIterator{
         $key = $this->keys[$this->index];
         return $this->collection[$key];
     }
+
+    public function size(){
+        return sizeof($this->keys);
+    }
 } 
